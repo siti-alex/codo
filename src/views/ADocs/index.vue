@@ -2,7 +2,7 @@
   div
     v-carousel(cycle='' height='400' show-arrows-on-hover='')
       v-carousel-item(v-for='(item, i) in items' :key='i' :src="item.src")
-    v-tabs(fixed-tabs='' background-color='indigo' dark='')
+    v-tabs(fixed-tabs='' background-color='#8b2639' dark='')
       v-tab(v-for='link in links' :key='link' :to="link.route")
         | {{ link.title }}
     div.grey.lighten-3
@@ -12,9 +12,7 @@
         v-card.mx-auto(height='100%' width='80%' elevation="6")
           v-card-title.justify-center Документы
           v-divider
-          v-content
-            v-content
-              h1 Документы
+          h1 Документы
 </template>
 
 <script>

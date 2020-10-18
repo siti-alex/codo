@@ -1,6 +1,10 @@
 <template lang="pug">
   v-app
-      router-view
+    v-app-bar(app='', color="#8b2639", dark='' clipped-left='' style="opacity: 0.8")
+      img(src='@/assets/logo2.png' align='left', tag='span', style='cursor: pointer')
+      v-spacer
+      v-toolbar-title Центр организации довузовского образования при БГПУ
+    router-view
 </template>
 
 <style lang="scss">
