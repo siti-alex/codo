@@ -55,6 +55,10 @@ export default {
         title: 'О нас',
         route: '/about'
       },
+      {
+        title: 'Личный кабинет',
+        route: '/'
+      },
     ],
     items: [
       {

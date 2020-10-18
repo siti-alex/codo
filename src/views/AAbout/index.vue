@@ -8,7 +8,7 @@
     div.grey.lighten-3
 
         v-card.mx-auto(height='100%' width='80%' elevation="6")
-          v-card-title.justify-center О нас
+          v-card-title.justify-center Контактная информация
           v-divider
           //v-content
             v-card-title.text-lg-h4 Контактная информация:
@@ -115,6 +115,10 @@ export default {
       {
         title: 'О нас',
         route: '/about'
+      },
+      {
+        title: 'Личный кабинет',
+        route: '/'
       },
     ],
     items: [
