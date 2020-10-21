@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 // import Directions from '../views/ADirections/index.vue'
 // import Docs from '../views/ADocs/index.vue'
 // import About from '../views/AAbout/index.vue'
+import NotFound from '../views/ANotFound/index.vue'
 import Home from '../components/AHomePage/index.vue'
 import Login from '../components/APersonalSystem/ALogin/index.vue'
 import Directions from '../components/AHomePage/ADirectionsPage/index.vue'
@@ -67,6 +68,7 @@ const routes = [
     name: 'Login',
     component: Login
   },
+  { path: "*", component: NotFound },
 
 
 
