@@ -13,6 +13,9 @@
 <script>
 import AHome from "@/views/AHome/index";
 export default {
-  components: {AHome}
+  components: {AHome},
+  data: () => ({
+
+  })
 }
 </script>
