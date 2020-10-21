@@ -32,7 +32,7 @@ name: "AHomePage",
       },
       {
         title: 'Личный кабинет',
-        route: '/'
+        route: '/login'
       },
     ],
     items: [
