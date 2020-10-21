@@ -19,7 +19,7 @@ export default {
   }),
   methods: {
     home(){
-      location.href = '#/home/news';
+      location.href = '/home/news';
     }
   }
 }
