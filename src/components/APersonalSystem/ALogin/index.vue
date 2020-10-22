@@ -15,7 +15,7 @@
               v-text-field#password(name='password', label='Пароль', prepend-icon="mdi-lock", type='password', required='', v-model='password' v-on:keyup.enter="auth")
           v-card-actions
             v-spacer
-            v-btn(color='#8b2639' dark @click='auth' width="30%") Войти
+            v-btn(color='#8b2639' dark @click='auth' width="30%" to="/personal") Войти
 </template>
 
 <script>

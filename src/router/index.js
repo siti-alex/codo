@@ -7,6 +7,7 @@ import VueRouter from 'vue-router'
 import NotFound from '../views/ANotFound/index.vue'
 import Home from '../components/AHomePage/index.vue'
 import Login from '../components/APersonalSystem/ALogin/index.vue'
+import Personal from '../components/APersonalSystem/index.vue'
 import Directions from '../components/AHomePage/ADirectionsPage/index.vue'
 import Docs from '../components/AHomePage/ADocsPage/index.vue'
 import About from '../components/AHomePage/AAboutPage/index.vue'
@@ -68,6 +69,13 @@ const routes = [
     name: 'Login',
     component: Login
   },
+  {
+    path: '/personal',
+    name: 'Personal',
+    component: Personal
+  },
+
+
   { path: "*", component: NotFound },
 
 
