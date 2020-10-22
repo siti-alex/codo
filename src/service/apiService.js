@@ -17,7 +17,7 @@ const API = axios.create({
         "Accept": "application/json",
         "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS",
         "Access-Control-Allow-Headers": "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With",
-        //'Content-Type': 'multipart/form-data'
+        'Content-Type': 'multipart/form-data',
         "Set-Cookie": "SameSite=None;"
         //"Set-Cookie": "cross-site-cookie=name; SameSite=None; Secure"
     }
