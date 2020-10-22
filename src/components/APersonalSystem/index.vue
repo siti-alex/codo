@@ -14,14 +14,20 @@
       v-container.py-8.px-6(fluid='')
       v-card(v-for='n in 6').mb-5
         v-subheader Направление
-        v-expansion-panels(accordion='' tile='')
+        v-expansion-panels(accordion='')
           v-expansion-panel(v-for='student in students' :key='student.id' cols='12' link='')
             v-expansion-panel-header {{student.fio}}
               template(v-if="student.id%2==0" v-slot:actions='')
                 v-icon(color='error')
                   | mdi-alert-circle
             v-expansion-panel-content
-              | Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+              h2.subtitle-2
+                | Предметы
+              v-chip-group(column='')
+                v-chip(outlined='' v-for="tag in tags" :key="tag")
+                  | {{tag}}
+              v-btn(color='primary' fab='' x-small='').float-lg-right
+                v-icon mdi-pencil
 
 
 </template>
@@ -34,12 +40,21 @@ name: "APersonalSystem",
     cards: ['Физико-матетиматический', 'Естественно-географический'],
     drawer: null,
     links: [
-      ['mdi-inbox-arrow-down', 'Школьники'],
-      ['mdi-send', 'Предметы'],
-      ['mdi-delete', 'Расписание'],
-      ['mdi-alert-octagon', 'Журнал'],
+      ['mdi-school', 'Школьники'],
+      ['mdi-book-open', 'Предметы'],
+      ['mdi-newspaper', 'Расписание'],
+      ['mdi-send', 'Журнал'],
     ],
     students: [],
+
+    tags: [
+      'Русский язык',
+      'Экономика',
+      'Музыка',
+      'География',
+      'Информатика',
+      'Экология',
+  ],
   }),
   methods: {
     getAllStudents() {
