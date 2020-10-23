@@ -1,6 +1,6 @@
 <template lang="pug">
   div#inspire
-    v-navigation-drawer(v-model='drawer' app='' clipped='' mobile-breakpoint=0)
+    v-navigation-drawer(app='' clipped='' mobile-breakpoint=0)
       v-sheet.pa-4(color='grey lighten-4')
         div.title Преподаватель
       v-divider
