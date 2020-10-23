@@ -7,6 +7,8 @@ import VueRouter from 'vue-router'
 import NotFound from '../views/ANotFound/index.vue'
 import Home from '../components/AHomePage/index.vue'
 import Login from '../components/APersonalSystem/ALogin/index.vue'
+import EditNews from '../components/APersonalSystem/ANewsEdit/index.vue'
+import Students from '../components/APersonalSystem/AStudents/index.vue'
 import Personal from '../components/APersonalSystem/index.vue'
 import Directions from '../components/AHomePage/ADirectionsPage/index.vue'
 import Docs from '../components/AHomePage/ADocsPage/index.vue'
@@ -72,7 +74,17 @@ const routes = [
   {
     path: '/personal',
     name: 'Personal',
-    component: Personal
+    component: Personal,
+    children: [
+      {
+        path: 'students',
+        component: Students
+      },
+      {
+        path: 'edit-news',
+        component: EditNews
+      },
+    ],
   },
 
 
