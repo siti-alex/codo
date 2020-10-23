@@ -15,12 +15,27 @@
               div {{news.text}}
             v-divider
             v-card-actions
-              v-btn(text='' color='deep-purple accent-4')
+              v-btn(text='' color='deep-purple accent-4' @click="dialog = true")
                 | Изменить
-              v-btn(text='' color='red darken-4' @click="deleteNews(newses.indexOf(news))")
+              //v-btn(text='' color='red darken-4' @click="deleteNews(newses.indexOf(news))")
+              v-btn(text='' color='red darken-4' @click="dialog = true; newsId = newses.indexOf(news)")
                 | Удалить
 
     br
+    v-row(justify='center')
+      v-dialog(v-model='dialog' persistent='' max-width='40%')
+        template(v-slot:activator='{ on, attrs }')
+        v-card
+          v-card-title.headline
+            | Новость будет удалена
+          v-card-text
+            | Вы уверены?
+          v-card-actions
+            v-spacer
+            v-btn(color='green darken-1' text='' @click='dialog = false')
+              | Отмена
+            v-btn(color='green darken-1' text='' @click='deleteNews(newsId); dialog = false')
+              | Удалить
 
 </template>
 
@@ -28,6 +43,8 @@
 export default {
 name: "ANewsEdit",
   data:() => ({
+    dialog: false,
+    newsId: 0,
     newses: [
       {
         id: '1',
