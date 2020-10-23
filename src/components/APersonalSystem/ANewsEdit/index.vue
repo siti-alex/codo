@@ -1,7 +1,12 @@
 <template lang="pug">
   div
     v-card.mx-auto(height='100%' width='80%' elevation="6")
-      v-card-title.justify-center Новости
+      //v-btn(color='primary' fab='' x-small='').float-lg-right.mx-5.mt-5
+        v-icon mdi-plus
+      v-card-title.justify-center Редактирование новостей
+        v-spacer
+        v-btn(color='#a25161' small='' dark='' right='' tile='').ml-5 Добавить
+          v-icon mdi-comment-plus-outline
       v-divider
       v-row
         //v-col(v-for='n in 8' cols='4')
@@ -15,7 +20,7 @@
               div {{news.text}}
             v-divider
             v-card-actions
-              v-btn(text='' color='deep-purple accent-4' @click="dialog = true")
+              v-btn(text='' color='deep-purple accent-4')
                 | Изменить
               //v-btn(text='' color='red darken-4' @click="deleteNews(newses.indexOf(news))")
               v-btn(text='' color='red darken-4' @click="dialog = true; newsId = newses.indexOf(news)")
