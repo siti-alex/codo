@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-    v-dialog(v-model='dialog' persistent='' width='500px' height="1000px")
+    v-dialog(v-model='dialog' persistent='' width='500px')
       v-card
         v-img.white--text.align-end(height='300px' src='https://cdn.vuetifyjs.com/images/cards/docks.jpg')
           //v-file-input(accept='image/*' dark='')
@@ -9,7 +9,7 @@ div
         v-card-subtitle.pb-0.mt-5
           | Дата
         v-card-text.text--primary
-          v-textarea(auto-grow='' value='Текст' v-model="newPost.text")
+          v-textarea(auto-grow='' value='Текст' v-model="newPost.text" autofocus='')
           v-file-input(label='Вставить изображение' accept='image/*' prepend-icon='mdi-camera' small-chips='' v-model="newPost.img")
         v-divider
         v-card-actions
