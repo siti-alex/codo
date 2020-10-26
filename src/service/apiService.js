@@ -49,6 +49,9 @@ export default {
     getAllStudents(){
         return API.get(`/student/getAllStudents`);
     },
+    setNews(news){
+        return API.post(`/news/upload`, news);
+    },
 
 
 
