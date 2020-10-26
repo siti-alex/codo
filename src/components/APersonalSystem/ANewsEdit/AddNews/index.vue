@@ -16,11 +16,12 @@ div
           v-btn(text='' color='deep-purple accent-4' @click="dialog = false")
             | Отмена
           v-spacer
-          v-btn(text='' color='green darken-2' @click="test")
+          v-btn(text='' color='green darken-2' @click="uploadNews")
             | Сохранить
 </template>
 
 <script>
+import Api from '@/service/apiService';
 export default {
 name: "AddNews",
   data:()=> ({
@@ -29,7 +30,7 @@ name: "AddNews",
       title: '',
       text: 'Текст',
       img: null,
-    }
+    },
   }),
   methods: {
     showDialog(){
@@ -39,7 +40,17 @@ name: "AddNews",
       console.log(this.newPost.title);
       console.log(this.newPost.text);
       console.log(this.newPost.img);
-    }
+    },
+    uploadNews(){
+      let formdata = new FormData();
+      formdata.append("head", this.newPost.title);
+      formdata.append("text", this.newPost.text);
+      formdata.append("file", this.newPost.img);
+      Api.setNews(formdata).then(result => {
+        console.log(result.data);
+        this.dialog = !this.dialog;
+      })
+    },
   }
 }
 </script>
