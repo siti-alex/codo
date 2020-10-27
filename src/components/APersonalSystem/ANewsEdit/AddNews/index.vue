@@ -1,23 +1,24 @@
 <template lang="pug">
 div
     v-dialog(v-model='dialog' persistent='' width='500px')
-      v-card
-        v-img.white--text.align-end(height='300px' src='https://cdn.vuetifyjs.com/images/cards/docks.jpg')
-          //v-file-input(accept='image/*' dark='')
-          v-card-title
-            v-text-field(label="Заголовок" dark='' v-model="newPost.title").title
-        v-card-subtitle.pb-0.mt-5
-          | Дата
-        v-card-text.text--primary
-          v-textarea(auto-grow='' value='Текст' v-model="newPost.text" autofocus='')
-          v-file-input(label='Вставить изображение' accept='image/*' prepend-icon='mdi-camera' small-chips='' v-model="newPost.img")
-        v-divider
-        v-card-actions
-          v-btn(text='' color='deep-purple accent-4' @click="dialog = false")
-            | Отмена
-          v-spacer
-          v-btn(text='' color='green darken-2' @click="uploadNews")
-            | Сохранить
+      v-card(tile='').pa-5
+        v-card(outlined='' elevation="19" tile='')
+          v-img.white--text.align-end(height='250px' src='https://www.amurobl.ru/upload/iblock/5e2/image_21_08_20_02_41_5.jpeg')
+            v-card-title
+              v-text-field(label="Заголовок" dark='' v-model="newPost.title").title
+          v-card-subtitle.pb-0.mt-5
+            | Дата
+          v-card-text.text--primary
+            v-textarea(auto-grow='' value='Текст' v-model="newPost.text" autofocus='')
+            //v-file-input(label='Вставить изображение' hide-input='' accept='image/*' prepend-icon='mdi-camera' small-chips='' v-model="newPost.img")
+          v-divider
+          v-card-actions
+            v-btn(text='' color='deep-purple accent-4' @click="dialog = false")
+              | Отмена
+            v-spacer
+            v-file-input(label='Вставить изображение' hide-input='' accept='image/*' prepend-icon='mdi-camera' small-chips='' v-model="newPost.img").mb-3
+            v-btn(text='' color='green darken-2' @click="uploadNews")
+              | Сохранить
 </template>
 
 <script>
@@ -50,8 +51,9 @@ name: "AddNews",
         console.log(result.data);
         //this.dialog = !this.dialog;
         //this.newPost.img = `http://213.87.96.9:6006/news/getImage?id=${result.data}`
+        this.$emit('update');
       });
-          this.$emit('update');
+
           this.dialog = !this.dialog;
     },
   }
