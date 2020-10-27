@@ -2,7 +2,8 @@ import axios from 'axios';
 //import router from '@/router';
 
 
-const api = 'http://213.87.96.9:6006';
+//const api = 'http://213.87.96.9:6006';
+const api = 'http://192.168.202.104:8080';
 
 
 const baseURL = `${api}`;
@@ -48,6 +49,9 @@ export default {
 
     getAllStudents(){
         return API.get(`/student/getAllStudents`);
+    },
+    getAllNews(){
+        return API.get(`/news/getAll`);
     },
     setNews(news){
         return API.post(`/news/upload`, news);
