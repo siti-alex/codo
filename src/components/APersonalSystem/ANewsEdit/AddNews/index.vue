@@ -50,7 +50,9 @@ name: "AddNews",
         console.log(result.data);
         //this.dialog = !this.dialog;
         //this.newPost.img = `http://213.87.96.9:6006/news/getImage?id=${result.data}`
-      })
+      });
+          this.$emit('update');
+          this.dialog = !this.dialog;
     },
   }
 }
