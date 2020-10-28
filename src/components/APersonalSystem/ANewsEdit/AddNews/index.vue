@@ -4,6 +4,8 @@ div
       v-card(tile='').pa-5
         v-card(outlined='' elevation="19" tile='')
           v-img.white--text.align-end(height='250px' :src='defaultImg' v-if="!newPost.img")
+            v-card-title
+              v-text-field(label="Заголовок" dark='' v-model="newPost.title").title
           v-img.white--text.align-end(height='250px' :src='previewImg' v-if="newPost.img")
             v-card-title
               v-text-field(label="Заголовок" dark='' v-model="newPost.title").title
@@ -19,7 +21,7 @@ div
             v-btn(text='' color='deep-purple accent-4' @click="dialog = false")
               | Отмена
             v-spacer
-            v-file-input(label='Вставить изображение' @change="imgPreview" hide-input='' prepend-icon='mdi-camera' v-model="newPost.img").mb-3
+            v-file-input(label='Вставить изображение' accept="image/*" @change="imgPreview" hide-input='' prepend-icon='mdi-camera' v-model="newPost.img").mb-3
             v-btn(text='' color='green darken-3' @click="uploadNews")
               | Сохранить
 </template>

@@ -8,7 +8,7 @@ div
         v-card.mx-5
           //v-img.white--text.align-end(height='200px' src='https://cdn.vuetifyjs.com/images/cards/docks.jpg')
           //v-img.white--text.align-end(height='200px' :src='`http://192.168.202.104:8080/news/getImage?id=`+newses.id')
-          v-img.white--text.align-end(height='200px' :src='serverIp+`/news/getImage?id=`+newses.id')
+          v-img.white--text.align-end(height='200px' :src='serverIp+`/news/getImage?id=`+newses.imgId')
             //v-card-title Карантин до 1 октября
             v-card-title {{newses.head}}
           v-card-subtitle.pb-0
@@ -33,6 +33,7 @@ name: "ANewsPage",
             Api.getAllNews().then(value => {
                     this.news = value.data;
                     //this.imgSrc = `http://192.168.202.104:8080/news/getImage?id=${value.data.id}`
+                console.log(value);
                 },
                 () => {
                     console.log('Ошибка');
