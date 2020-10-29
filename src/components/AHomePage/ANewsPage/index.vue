@@ -4,8 +4,8 @@ div
     v-card-title.justify-center Новости
     v-divider
     v-row
-      v-col(v-for='newses in news' cols='4')
-        v-card.mx-5
+      v-col(v-for='newses in news' :key='newses.id' cols='4')
+        v-card(tile='').mx-5
           //v-img.white--text.align-end(height='200px' src='https://cdn.vuetifyjs.com/images/cards/docks.jpg')
           //v-img.white--text.align-end(height='200px' :src='`http://192.168.202.104:8080/news/getImage?id=`+newses.id')
           v-img.white--text.align-end(height='200px' :src='serverIp+`/news/getImage?id=`+newses.imgId')
