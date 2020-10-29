@@ -20,13 +20,14 @@
               div {{newses.text}}
             v-divider
             v-card-actions
-              v-btn(text='' color='deep-purple accent-4' @click='showChangeNews(news.indexOf(newses))')
+              //v-btn(text='' color='deep-purple accent-4' @click='showChangeNews(news.indexOf(newses))')
+              v-btn(text='' color='deep-purple accent-4' @click='showChangeNews(); curNews = newses')
                 | Изменить
               //v-btn(text='' color='red darken-4' @click="deleteNews(newses.indexOf(news))")
               v-spacer
               v-btn(text='' color='red darken-4' @click="dialog = true; newsId = newses.id")
                 | Удалить
-            change-news(ref="ChangeNews" :NewsSrc="newses" @update = "getAllNews")
+            //change-news(ref="ChangeNews" :NewsSrc="newses" @update = "getAllNews")
     br
     v-row(justify='center')
       v-dialog(v-model='dialog' persistent='' max-width='40%')
@@ -44,6 +45,7 @@
               | Удалить
 
     add-news(ref="AddNews" @update = "getAllNews")
+    change-news(ref="ChangeNews" :NewsSrc="curNews" @update = "getAllNews")
 </template>
 
 <script>
@@ -59,13 +61,14 @@ name: "ANewsEdit",
     newsId: 0,
     news: [],
     serverIp: Api.api,
+    curNews: {},
   }),
   methods: {
     showNews(){
       this.$refs.AddNews.showDialog();
     },
-    showChangeNews(index){
-      this.$refs.ChangeNews[index].showDialog();
+    showChangeNews(){
+      this.$refs.ChangeNews.showDialog();
     },
     getAllNews(){
       Api.getAllNews().then(value => {
