@@ -37,16 +37,16 @@ name: "ChangeNews",
   methods: {
     showDialog(){
       this.dialog = !this.dialog;
-      console.log(this.NewsSrc);
+      //console.log(this.NewsSrc);
     },
     uploadNews(){
       let formdata = new FormData();
       formdata.append("id", this.NewsSrc.id);
       formdata.append("head", this.NewsSrc.head);
       formdata.append("text", this.NewsSrc.text);
-      Api.ChangeNews(formdata).then(result => {
-        console.log(result.data);
-        //this.$emit('update');
+      Api.ChangeNews(formdata).then(() => {
+        //console.log(result.data);
+        this.$emit('update');
       });
       this.dialog = !this.dialog;
     },

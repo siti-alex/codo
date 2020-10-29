@@ -26,7 +26,7 @@
               v-spacer
               v-btn(text='' color='red darken-4' @click="dialog = true; newsId = newses.id")
                 | Удалить
-            change-news(ref="ChangeNews" :NewsSrc="newses")
+            change-news(ref="ChangeNews" :NewsSrc="newses" @update = "getAllNews")
     br
     v-row(justify='center')
       v-dialog(v-model='dialog' persistent='' max-width='40%')
