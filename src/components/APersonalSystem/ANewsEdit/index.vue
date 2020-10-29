@@ -20,13 +20,13 @@
               div {{newses.text}}
             v-divider
             v-card-actions
-              v-btn(text='' color='deep-purple accent-4' )
+              v-btn(text='' color='deep-purple accent-4' @click='showChangeNews(news.indexOf(newses))')
                 | Изменить
               //v-btn(text='' color='red darken-4' @click="deleteNews(newses.indexOf(news))")
               v-spacer
               v-btn(text='' color='red darken-4' @click="dialog = true; newsId = newses.id")
                 | Удалить
-
+            change-news(ref="ChangeNews" :NewsSrc="newses")
     br
     v-row(justify='center')
       v-dialog(v-model='dialog' persistent='' max-width='40%')
@@ -49,10 +49,11 @@
 <script>
 import AddNews from "@/components/APersonalSystem/ANewsEdit/AddNews/index";
 import Api from "@/service/apiService";
+import ChangeNews from "@/components/APersonalSystem/ANewsEdit/ChangeNews/index";
 
 export default {
 name: "ANewsEdit",
-  components: {AddNews},
+  components: {ChangeNews, AddNews},
   data:() => ({
     dialog: false,
     newsId: 0,
@@ -60,11 +61,11 @@ name: "ANewsEdit",
     serverIp: Api.api,
   }),
   methods: {
-    deleteNewss(id){
-      this.news.splice(id,1);
-    },
     showNews(){
       this.$refs.AddNews.showDialog();
+    },
+    showChangeNews(index){
+      this.$refs.ChangeNews[index].showDialog();
     },
     getAllNews(){
       Api.getAllNews().then(value => {
