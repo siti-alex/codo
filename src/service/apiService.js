@@ -50,6 +50,9 @@ export default {
     getAllStudents(){
         return API.get(`/student/getAllStudents`);
     },
+    deleteNewsById(id){
+        return API.get(`/news/delete?id=${id}`);
+    },
     getAllNews(){
         return API.get(`/news/getAll`);
     },

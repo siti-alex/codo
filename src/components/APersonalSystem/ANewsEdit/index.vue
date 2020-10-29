@@ -24,7 +24,7 @@
                 | Изменить
               //v-btn(text='' color='red darken-4' @click="deleteNews(newses.indexOf(news))")
               v-spacer
-              v-btn(text='' color='red darken-4' @click="dialog = true; newsId = news.indexOf(newses)")
+              v-btn(text='' color='red darken-4' @click="dialog = true; newsId = newses.id")
                 | Удалить
 
     br
@@ -60,7 +60,7 @@ name: "ANewsEdit",
     serverIp: Api.api,
   }),
   methods: {
-    deleteNews(id){
+    deleteNewss(id){
       this.news.splice(id,1);
     },
     showNews(){
@@ -74,7 +74,16 @@ name: "ANewsEdit",
           () => {
             console.log('Ошибка');
           });
-    }
+    },
+      deleteNews(){
+          Api.deleteNewsById(this.newsId).then(() => {
+                  this.getAllNews();
+              },
+              () => {
+                  console.log('Ошибка');
+              });
+
+      }
   },
   mounted() {
     this.getAllNews();

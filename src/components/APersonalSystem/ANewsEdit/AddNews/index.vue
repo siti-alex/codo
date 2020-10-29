@@ -60,13 +60,13 @@ name: "AddNews",
       formdata.append("head", this.newPost.title);
       formdata.append("text", this.newPost.text);
       formdata.append("file", this.newPost.img);
+      console.log(this.newPost.img);
       Api.setNews(formdata).then(result => {
         console.log(result.data);
         //this.dialog = !this.dialog;
         //this.newPost.img = `http://213.87.96.9:6006/news/getImage?id=${result.data}`
         this.$emit('update');
       });
-
           this.dialog = !this.dialog;
     },
   }
