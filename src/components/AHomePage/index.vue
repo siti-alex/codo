@@ -19,6 +19,10 @@ name: "AHomePage",
         route: '/home/news'
       },
       {
+        title: 'Мероприятия',
+        route: '/home/events'
+      },
+      {
         title: 'Направления',
         route: '/home/directions'
       },

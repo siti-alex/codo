@@ -14,6 +14,7 @@ import Directions from '../components/AHomePage/ADirectionsPage/index.vue'
 import Docs from '../components/AHomePage/ADocsPage/index.vue'
 import About from '../components/AHomePage/AAboutPage/index.vue'
 import News from '../components/AHomePage/ANewsPage/index.vue'
+import Events from '../components/AHomePage/AEvents/index.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -51,6 +52,10 @@ const routes = [
       {
         path: 'news',
         component: News
+      },
+      {
+        path: 'events',
+        component: Events
       },
       {
         path: 'directions',
