@@ -5,7 +5,7 @@ div
     v-divider
     v-card-title.justify-center.subtitle-2 Ближайшие события
     v-row
-      v-col(v-for='item in cards' cols='4')
+      v-col(v-for='item in cards.slice(0, 3)' cols='4')
         v-card(tile='').mx-5
           v-img.white--text.align-end(height='150px' src='https://cdn.vuetifyjs.com/images/cards/docks.jpg')
             v-card-title {{item.head}}
@@ -58,6 +58,11 @@ name: "AEvents",
         head: 'Поход в музей',
         text: 'В 15:00 все идем в музей',
         date: '2020-10-25',
+      },
+      {
+        head: 'Тестовый хеад',
+        text: 'Текстовый текст',
+        date: '2020-10-26',
       }
     ]
   }),
