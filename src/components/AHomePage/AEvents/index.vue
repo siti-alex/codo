@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  v-card.mx-auto(height='100%' width='80%' elevation="6")
+  v-card.mx-auto(height='100%' width='80%' elevation="6").text
     v-card-title.justify-center Мероприятия
     v-divider
     v-card-title.justify-center.subtitle-2 Ближайшие события
@@ -10,12 +10,13 @@ div
           v-img.white--text.align-end(height='150px' src='https://cdn.vuetifyjs.com/images/cards/docks.jpg')
             v-card-title {{item.head}}
           v-card-subtitle.pb-0
-          v-chip(color='deep-purple' dark='').ml-3
+          v-chip(color='deep-purple' dark='' small='').ml-3
             | {{item.date}}
           v-card-text.text--primary
             div {{item.text}}
     v-divider
     //v-card(width='45%').ml-5
+    v-card-title.justify-center.subtitle-2 Календарь мероприятий
     v-row.ml-3.mr-3
       v-col(cols='6')
         //v-date-picker(v-model='dates' multiple='' no-title='' :allowed-dates="getAllowedDates" full-width='' locale="ru-ru" color="#8b2639" elevation='10' @input="selectEvent")
@@ -93,5 +94,8 @@ name: "AEvents",
 </script>
 
 <style scoped>
+.text {
+
+}
 
 </style>
