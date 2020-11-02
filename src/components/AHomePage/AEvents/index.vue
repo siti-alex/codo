@@ -6,7 +6,7 @@ div
     v-card-title.justify-center.subtitle-2 Ближайшие события
     v-row
       v-col(v-for='item in cards.slice(0, 3)' cols='4')
-        v-card(tile='' height='100%' @click="").mx-5
+        v-card(tile='' height='100%' hover='' @click="").mx-5
           v-img.white--text.align-end(height='150px' src='https://cdn.vuetifyjs.com/images/cards/docks.jpg')
             v-card-title {{item.head}}
           v-card-subtitle.pb-0
@@ -18,18 +18,20 @@ div
     //v-card(width='45%').ml-5
     v-card-title.justify-center.subtitle-2 Календарь мероприятий
     v-row.ml-3.mr-3
-      v-col(cols='6')
+      v-col(cols='4')
         //v-date-picker(v-model='dates' multiple='' no-title='' :allowed-dates="getAllowedDates" full-width='' locale="ru-ru" color="#8b2639" elevation='10' @input="selectEvent")
         v-date-picker(v-model='dates' multiple='' no-title='' :allowed-dates="getAllowedDates" full-width='' locale="ru-ru" color="#8b2639" elevation='10' @input="selectEvent")
-      v-col(cols='6')
-        v-card(tile='' v-if="cardEvent")
-          v-img.white--text.align-end(height='278px' src='https://cdn.vuetifyjs.com/images/cards/docks.jpg')
-            v-card-title {{cardEvent.head}}
-          v-card-subtitle.pb-0
-          v-chip(color='deep-purple' dark='').ml-3
-            | {{cardEvent.date}}
-          v-card-text.text--primary
-            div {{cardEvent.text}}
+      v-col(cols='8')
+        v-card
+          v-card(tile='' v-if="cardEvent" @click="")
+            v-img.white--text.align-end(height='200px' src='https://www.amurobl.ru/upload/iblock/5e2/image_21_08_20_02_41_5.jpeg')
+              v-card-title(style="background-color:#000000; opacity: 0.8; height: 50px").pa-2
+                p.ml-3 {{cardEvent.head}}
+            v-card-subtitle.pb-0
+            v-chip(color='deep-purple' dark='').ml-3
+              | {{cardEvent.date}}
+            v-card-text.text--primary
+              div {{cardEvent.text}}
     br
   br
 </template>
