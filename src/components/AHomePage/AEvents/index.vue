@@ -17,11 +17,12 @@ div
     v-divider
     //v-card(width='45%').ml-5
     v-card-title.justify-center.subtitle-2 Календарь мероприятий
-    v-row.ml-3.mr-3
+    v-row
+      v-col(cols='1')
       v-col(cols='4')
         //v-date-picker(v-model='dates' multiple='' no-title='' :allowed-dates="getAllowedDates" full-width='' locale="ru-ru" color="#8b2639" elevation='10' @input="selectEvent")
         v-date-picker(v-model='dates' multiple='' no-title='' :allowed-dates="getAllowedDates" full-width='' locale="ru-ru" color="#8b2639" elevation='10' @input="selectEvent")
-      v-col(cols='8')
+      v-col(cols='6')
         v-card
           v-card(tile='' v-if="cardEvent" @click="")
             v-img.white--text.align-end(height='200px' src='https://www.amurobl.ru/upload/iblock/5e2/image_21_08_20_02_41_5.jpeg')
@@ -32,6 +33,7 @@ div
               | {{cardEvent.date}}
             v-card-text.text--primary
               div {{cardEvent.text}}
+      v-col(cols='1')
     br
   br
 </template>

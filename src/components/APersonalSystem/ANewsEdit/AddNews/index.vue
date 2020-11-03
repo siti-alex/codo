@@ -49,6 +49,9 @@ name: "AddNews",
     },
     showDialog(){
       this.dialog = !this.dialog;
+      this.newPost.img = null;
+      this.newPost.text = 'Текст';
+      this.newPost.title = '';
     },
     test(){
       console.log(this.newPost.title);
@@ -65,8 +68,9 @@ name: "AddNews",
         //this.dialog = !this.dialog;
         //this.newPost.img = `http://213.87.96.9:6006/news/getImage?id=${result.data}`
         this.$emit('update');
+        this.showDialog();
       });
-          this.dialog = !this.dialog;
+
     },
   }
 }
