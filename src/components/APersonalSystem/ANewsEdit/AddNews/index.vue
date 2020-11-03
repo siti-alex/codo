@@ -1,29 +1,53 @@
 <template lang="pug">
 div
-    v-dialog(v-model='dialog' persistent='' width='500px')
-      v-card(tile='').pa-5
-        v-card(outlined='' elevation="19" tile='')
-          v-img.white--text.align-end(height='250px' :src='defaultImg' v-if="!newPost.img")
-            v-card-title
-              v-text-field(label="Заголовок" dark='' v-model="newPost.title").title
-          v-img.white--text.align-end(height='250px' :src='previewImg' v-if="newPost.img")
-            v-card-title
-              v-text-field(label="Заголовок" dark='' v-model="newPost.title").title
-          v-card-subtitle.pb-0
-            | Дата
-          v-card-text.text--primary
-            v-divider
-            v-textarea(auto-grow='' value='Текст' v-model="newPost.text" autofocus='')
-            //v-file-input(label='Вставить изображение' hide-input='' accept='image/*' prepend-icon='mdi-camera' small-chips='' v-model="newPost.img")
-          v-divider
-          v-card-actions
-            //v-btn(text='' color='deep-purple accent-4' @click="dialog = false")
-            v-btn(text='' color='deep-purple accent-4' @click="dialog = false")
-              | Отмена
-            v-spacer
-            v-file-input(label='Вставить изображение' accept="image/*" @change="imgPreview" hide-input='' prepend-icon='mdi-camera' v-model="newPost.img").mb-3
-            v-btn(text='' color='green darken-3' @click="uploadNews")
+    v-dialog(v-model='dialog' fullscreen='' hide-overlay='' transition='dialog-bottom-transition')
+      v-card
+        v-toolbar(dark='' color="#8b2639")
+          v-btn(icon='' dark='' @click='dialog = false')
+            v-icon mdi-close
+          v-toolbar-title Создание новости
+          v-spacer
+          v-toolbar-items
+            v-btn(dark='' text='' @click='dialog = false')
               | Сохранить
+
+        v-list()
+          v-list-item
+              v-list-item-subtitle С помощью данной формы можно создать и мероприятие, просто установив соответсвующий пункт ниже
+          v-list-item
+            v-list-item-content
+              p Опубликовать как
+              v-radio-group(v-model='radioGroup' mandatory='true').ml-3
+                v-radio(label='Новость' value=true)
+                v-radio(label='Мепроприятие' value=false)
+        v-divider
+
+        v-row(no-gutters='')
+          v-col(cols='4')
+              v-card(outlined='' elevation="19" tile='').pa-3.mx-3.mt-3
+                v-img.white--text.align-end(height='200px' :src='defaultImg' v-if="!newPost.img")
+                  v-card-title
+                    v-text-field(label="Заголовок" dark='' v-model="newPost.title").title
+                v-img.white--text.align-end(height='200px' :src='previewImg' v-if="newPost.img")
+                  v-card-title
+                    v-text-field(label="Заголовок" dark='' v-model="newPost.title").title
+                v-card-subtitle(v-if='!radioGroup').pb-0
+                  | Дата
+                v-menu(v-model='menu2' :close-on-content-click='false' :nudge-right='40' transition='scale-transition' offset-y='' min-width='290px' v-if='radioGroup')
+                  template(v-slot:activator='{ on, attrs }')
+                    v-text-field(v-model='date' label='Выберите дату' prepend-icon='mdi-calendar' readonly='' v-bind='attrs' v-on='on')
+                  v-date-picker(v-model='date' @input='menu2 = false' locale='ru-ru')
+                v-card-text.pa-0.text--primary
+                  v-divider
+                  v-textarea(auto-grow='' value='Текст' v-model="newPost.text" autofocus='')
+                v-divider
+                v-file-input(label='Вставить изображение' accept="image/*" @change="imgPreview" hide-input='' prepend-icon='mdi-camera' v-model="newPost.img").pa-0.justify-center
+          v-divider(vertical='')
+          v-col(cols='6')
+            //v-menu(v-model='menu2' :close-on-content-click='false' :nudge-right='40' transition='scale-transition' offset-y='' min-width='290px')
+              template(v-slot:activator='{ on, attrs }')
+                v-text-field(v-model='date' label='Picker without buttons' prepend-icon='mdi-calendar' readonly='' v-bind='attrs' v-on='on')
+              v-date-picker(v-model='date' @input='menu2 = false')
 </template>
 
 <script>
@@ -31,6 +55,13 @@ import Api from '@/service/apiService';
 export default {
 name: "AddNews",
   data:()=> ({
+    date: new Date().toISOString().substr(0, 10),
+    menu: false,
+    modal: false,
+    menu2: false,
+
+    radioGroup: true,
+
     dialog: false,
     defaultImg: 'https://www.amurobl.ru/upload/iblock/5e2/image_21_08_20_02_41_5.jpeg',
     previewImg: '',
