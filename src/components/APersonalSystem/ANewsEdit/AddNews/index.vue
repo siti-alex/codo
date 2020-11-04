@@ -8,22 +8,21 @@ div
           v-toolbar-title Создание новости
           v-spacer
           v-toolbar-items
-            v-btn(dark='' text='' @click='dialog = false')
+            v-btn(dark='' text='' @click='test')
               | Сохранить
-
-        v-list()
-          v-list-item
-              v-list-item-subtitle С помощью данной формы можно создать и мероприятие, просто установив соответсвующий пункт ниже
-          v-list-item
-            v-list-item-content
-              p Опубликовать как
-              v-radio-group(v-model='radioGroup' mandatory='true').ml-3
-                v-radio(label='Новость' value=true)
-                v-radio(label='Мепроприятие' value=false)
         v-divider
-
-        v-row(no-gutters='')
+        v-row(no-gutters='').mx-5.mt-3
           v-col(cols='4')
+              v-list()
+                v-list-item
+                  v-list-item-content
+                    p Опубликовать как
+                    v-radio-group(v-model='radioGroup' mandatory=true).ml-3
+                      v-radio(label='Новость' value=true)
+                      v-radio(label='Мероприятие' value=false)
+              v-divider
+
+
               v-card(outlined='' elevation="19" tile='').pa-3.mx-3.mt-3
                 v-img.white--text.align-end(height='200px' :src='defaultImg' v-if="!newPost.img")
                   v-card-title
@@ -42,8 +41,10 @@ div
                   v-textarea(auto-grow='' value='Текст' v-model="newPost.text" autofocus='')
                 v-divider
                 v-file-input(label='Вставить изображение' accept="image/*" @change="imgPreview" hide-input='' prepend-icon='mdi-camera' v-model="newPost.img").pa-0.justify-center
-          v-divider(vertical='')
-          v-col(cols='6')
+          //v-divider(vertical='')
+          br
+          v-col(cols='8')
+            mc-wysiwyg(v-model="html" height="650")
             //v-menu(v-model='menu2' :close-on-content-click='false' :nudge-right='40' transition='scale-transition' offset-y='' min-width='290px')
               template(v-slot:activator='{ on, attrs }')
                 v-text-field(v-model='date' label='Picker without buttons' prepend-icon='mdi-calendar' readonly='' v-bind='attrs' v-on='on')
@@ -52,7 +53,11 @@ div
 
 <script>
 import Api from '@/service/apiService';
+import { McWysiwyg } from '@mycure/vue-wysiwyg';
 export default {
+  components: {
+    McWysiwyg
+  },
 name: "AddNews",
   data:()=> ({
     date: new Date().toISOString().substr(0, 10),
@@ -70,6 +75,7 @@ name: "AddNews",
       text: 'Текст',
       img: null,
     },
+    html: '',
   }),
   methods: {
     imgPreview(){
@@ -85,9 +91,7 @@ name: "AddNews",
       this.newPost.title = '';
     },
     test(){
-      console.log(this.newPost.title);
-      console.log(this.newPost.text);
-      console.log(this.newPost.img);
+      console.log(this.html);
     },
     uploadNews(){
       let formdata = new FormData();
