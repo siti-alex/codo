@@ -17,7 +17,7 @@
             v-card-subtitle.pb-0
               | {{newses.date}}
             v-card-text.text--primary
-              div {{newses.text}}
+              div {{newses.previewText}}
             v-divider
             v-card-actions
               //v-btn(text='' color='deep-purple accent-4' @click='showChangeNews(news.indexOf(newses))')

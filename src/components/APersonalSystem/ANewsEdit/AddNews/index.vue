@@ -8,7 +8,7 @@ div
           v-toolbar-title Создание новости
           v-spacer
           v-toolbar-items
-            v-btn(dark='' text='' @click='test')
+            v-btn(dark='' text='' @click='uploadNews')
               | Сохранить
         v-divider
         v-row(no-gutters='').mx-5.mt-3
@@ -44,7 +44,7 @@ div
           //v-divider(vertical='')
           br
           v-col(cols='8')
-            mc-wysiwyg(v-model="html" height="650")
+            mc-wysiwyg(v-model="newPost.html" height="650")
             //v-menu(v-model='menu2' :close-on-content-click='false' :nudge-right='40' transition='scale-transition' offset-y='' min-width='290px')
               template(v-slot:activator='{ on, attrs }')
                 v-text-field(v-model='date' label='Picker without buttons' prepend-icon='mdi-calendar' readonly='' v-bind='attrs' v-on='on')
@@ -74,8 +74,9 @@ name: "AddNews",
       title: '',
       text: 'Текст',
       img: null,
+      html: '',
     },
-    html: '',
+    //html: '',
   }),
   methods: {
     imgPreview(){
@@ -91,12 +92,14 @@ name: "AddNews",
       this.newPost.title = '';
     },
     test(){
-      console.log(this.html);
+      console.log(this.newPost.html);
     },
     uploadNews(){
+      console.log(this.newPost);
       let formdata = new FormData();
       formdata.append("head", this.newPost.title);
-      formdata.append("text", this.newPost.text);
+      formdata.append("previewText", this.newPost.text);
+      formdata.append("fullText", this.newPost.html);
       formdata.append("file", this.newPost.img);
       Api.setNews(formdata).then(result => {
         console.log(result.data);
