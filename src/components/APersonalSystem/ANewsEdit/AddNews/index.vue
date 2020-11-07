@@ -44,7 +44,8 @@ div
           //v-divider(vertical='')
           br
           v-col(cols='8')
-            mc-wysiwyg(v-model="newPost.html" height="650")
+            a-c-m-s(v-model="newPost.html" height="650")
+            //mc-wysiwyg(v-model="newPost.html" height="650")
             //v-menu(v-model='menu2' :close-on-content-click='false' :nudge-right='40' transition='scale-transition' offset-y='' min-width='290px')
               template(v-slot:activator='{ on, attrs }')
                 v-text-field(v-model='date' label='Picker without buttons' prepend-icon='mdi-calendar' readonly='' v-bind='attrs' v-on='on')
@@ -54,8 +55,10 @@ div
 <script>
 import Api from '@/service/apiService';
 import { McWysiwyg } from '@mycure/vue-wysiwyg';
+import ACMS from "@/views/ACMS/index";
 export default {
   components: {
+    ACMS,
     McWysiwyg
   },
 name: "AddNews",

@@ -2,8 +2,8 @@ import axios from 'axios';
 //import router from '@/router';
 
 
-//const api = 'http://213.87.96.9:6006';
-const api = 'http://192.168.202.104:8080';
+const api = 'http://213.87.96.9:6006';
+//const api = 'http://192.168.202.104:8080';
 
 
 const baseURL = `${api}`;
@@ -61,6 +61,9 @@ export default {
     },
     ChangeNews(news){
         return API.post(`/news/update`, news);
+    },
+    UploadImage(img){
+        return API.post(`/image/upload`, img);
     },
 
 
