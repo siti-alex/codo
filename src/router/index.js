@@ -14,36 +14,11 @@ import Directions from '../components/AHomePage/ADirectionsPage/index.vue'
 import Docs from '../components/AHomePage/ADocsPage/index.vue'
 import About from '../components/AHomePage/AAboutPage/index.vue'
 import News from '../components/AHomePage/ANewsPage/index.vue'
+import NewsId from '../components/AHomePage/ANewsPage/ANews/index.vue'
 import Events from '../components/AHomePage/AEvents/index.vue'
 Vue.use(VueRouter)
 
 const routes = [
-  // {
-  //   path: '/',
-  //   name: 'Home',
-  //   component: Home
-  // },
-  // {
-  //   path: '/news',
-  //   name: 'Home',
-  //   component: Home
-  // },
-  // {
-  //   path: '/directions',
-  //   name: 'Directions',
-  //   component: Directions,
-  // },
-  // {
-  //   path: '/docs',
-  //   name: 'Docs',
-  //   component: Docs,
-  // },
-  // {
-  //   path: '/about',
-  //   name: 'About',
-  //   component: About,
-  // },
-
   {
     path: '/home',
     name: 'Home',
@@ -51,7 +26,12 @@ const routes = [
     children: [
       {
         path: 'news',
-        component: News
+        component: News,
+      },
+      {
+        path: 'news/:id',
+        component: NewsId,
+        name: 'NewsId',
       },
       {
         path: 'events',

@@ -59,6 +59,9 @@ export default {
     setNews(news){
         return API.post(`/news/upload`, news);
     },
+    getFullTextNews(id){
+        return API.get(`/news/getFullTextById?id=${id}`);
+    },
     ChangeNews(news){
         return API.post(`/news/update`, news);
     },
