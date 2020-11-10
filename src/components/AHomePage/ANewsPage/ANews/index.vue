@@ -1,9 +1,9 @@
 <template lang="pug">
 div
   v-card.mx-auto(height='100%' width='80%' elevation="6" min-height='700px')
-    v-card-title.justify-center Новости
+    v-card-title.justify-center {{title}}
     v-divider
-    v-btn(tile='', @click="fGoBack" small='' dark='' color="#8b2639")
+    v-btn(tile='', small='' dark='' color="#8b2639" to="/home/news")
       v-icon mdi-keyboard-backspace
       | Вернуться
     v-sheet(width='90%' height='100%' v-html="text").mx-auto.mt-5
@@ -19,15 +19,14 @@ export default {
 name: "ANews",
   data: () => ({
     text: null,
+    title: null,
   }),
   methods: {
-    fGoBack(){
-      history.back();
-    },
     getText(){
-      Api.getFullTextNews(this.$route.params.id).then(result => {
+      Api.getNewsById(this.$route.params.id).then(result => {
         console.log(result);
-        this.text= result.data;
+        this.text= result.data.fullText;
+        this.title= result.data.head;
       })
     },
   },
