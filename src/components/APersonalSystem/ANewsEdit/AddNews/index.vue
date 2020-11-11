@@ -41,15 +41,11 @@ div
                   v-textarea(auto-grow='' value='Текст' v-model="newPost.text" autofocus='')
                 v-divider
                 v-file-input(label='Вставить изображение' accept="image/*" @change="imgPreview" hide-input='' prepend-icon='mdi-camera' v-model="newPost.img").pa-0.justify-center
-          //v-divider(vertical='')
+
           br
           v-col(cols='8')
             a-c-m-s(v-model="newPost.html" height="650")
-            //mc-wysiwyg(v-model="newPost.html" height="650")
-            //v-menu(v-model='menu2' :close-on-content-click='false' :nudge-right='40' transition='scale-transition' offset-y='' min-width='290px')
-              template(v-slot:activator='{ on, attrs }')
-                v-text-field(v-model='date' label='Picker without buttons' prepend-icon='mdi-calendar' readonly='' v-bind='attrs' v-on='on')
-              v-date-picker(v-model='date' @input='menu2 = false')
+
 </template>
 
 <script>
