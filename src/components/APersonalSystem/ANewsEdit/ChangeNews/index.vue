@@ -3,7 +3,7 @@
     v-dialog(v-model='dialog' fullscreen='' hide-overlay='' transition='dialog-bottom-transition')
       v-card
         v-toolbar(dark='' color="#8b2639")
-          v-btn(icon='' dark='' @click='showDialog')
+          v-btn(icon='' dark='' @click='showDialog()')
             v-icon mdi-close
           v-toolbar-title Изменение новости
           v-spacer
@@ -27,7 +27,7 @@
 
           br
           v-col(cols='8')
-            a-c-m-s(v-model="NewsSrc.fullText" height="650" v-if="NewsSrc.fullText")
+            a-c-m-s(v-model="NewsSrc.fullText+''" height="650" v-if="dialog")
 </template>
 
 <script>
@@ -50,13 +50,9 @@ name: "ChangeNews",
 
   }),
   methods: {
-    test(){
-      console.log(this.NewsSrc);
-    },
     showDialog(){
       this.dialog = !this.dialog;
       //console.log(this.NewsSrc);
-      this.NewsSrc.fullText = null;
     },
     uploadNews(){
       let formdata = new FormData();
