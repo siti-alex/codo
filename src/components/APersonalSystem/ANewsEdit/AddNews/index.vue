@@ -44,7 +44,7 @@ div
 
           br
           v-col(cols='8')
-            a-c-m-s(v-model="newPost.html" height="650")
+            a-c-m-s(v-model="newPost.html" height="650" v-if="dialog")
 
 </template>
 
@@ -89,6 +89,7 @@ name: "AddNews",
       this.newPost.img = null;
       this.newPost.text = 'Текст';
       this.newPost.title = '';
+      this.newPost.html = '';
     },
     test(){
       console.log(this.newPost.html);

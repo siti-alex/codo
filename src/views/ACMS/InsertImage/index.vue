@@ -7,7 +7,7 @@
         v-container
           v-row
             v-col(cols='12')
-              v-file-input(label="Картинка" accept="image/*" v-model="files")
+              v-file-input(label="Картинка" accept="image/*" v-model="files" @change="imgPreview")
             v-col(cols='12' v-if="files")
               v-radio-group(row='' v-model="formatImgText")
                 v-divider(vertical='')
@@ -20,12 +20,12 @@
                 v-icon(left='') mdi-format-float-none
                 v-radio(value='none')
               v-btn(color='blue darken-1', text='', @click="imgPreview") Изменить размер
-            v-col(cols='12' v-if="resize")
+            v-col(cols='12' v-if="resize && files")
               v-container(fluid='')
                 v-slider(v-model='widthImg', min='10', max='1000', step='1'  thumb-label="always")
                 v-navigation-drawer(:width='widthImg', :value='true', stateless='')
             v-col(cols='12' v-if="resize")
-              v-img(:src="previewImg" :width='widthImg')
+              v-img(:src="previewImg" :width='widthImg' v-if="files")
 
 
 
@@ -36,7 +36,6 @@
         v-btn(color='blue darken-1', text='', @click="showDialog") Закрыть
         v-spacer
         v-btn(color='blue darken-1', text='', @click="uploadImage") Вставить картинку
-
 
 </template>
 
@@ -77,49 +76,13 @@ export default {
         this.showDialog();
       })
     },
-/*
-    ImgLink() {
 
-      //this.$emit('Insert', this.text);
-      Api.upFile(this.files).then(result => {
-            //this.$emit('Insert', `<img src=${Api.api}/file/get?id=${result}>${this.text}</img>`);
-            //this.$emit('Insert', `<img style="float: left; margin: 0 13px 5px 0; " src=${Api.api}/file/get?id=${result} width=${this.widthImg} alt=${this.text}></img>`);
-            this.$emit('Insert', `<img style="float: ${this.formatImgText}; margin: 0 13px 5px 0; " src=${Api.api}/file/get?id=${result} width=${this.widthImg} alt=${this.text}></img>`);
-            this.text = '';
-            this.files = null;
-            this.srcImg = '';
-            this.formatImgText = 'none';
-            this.width = 160;
-
-
-            //this.fileId = result;
-          },
-          (error => {
-            console.log(error)
-          })
-      );
-      //this.text = '';
-      //this.files = null;
-      this.resize = false;
-      this.mutableDialog = !this.mutableDialog;
-    },
-    LoadImg() {
-      this.resize = true;
-      //this.$emit('Insert', this.text);
-      Api.upFile(this.files).then(result => {
-        //console.log(result);
-        //this.$emit('Insert', `<img src=${Api.api}/file/get?id=${result}>${this.text}</img>`);
-        //this.$emit('Insert', `<img src=${Api.api}/file/get?id=${result} alt=${this.text}></img>`);
-        this.srcImg = `${Api.api}/file/get?id=${result}`;
-
-
-        //this.fileId = result;
-      });
-      //this.text = '';
-      //this.files = null;
-    }, */
     showDialog() {
       this.mutableDialog = !this.mutableDialog;
+      this.files = null;
+      this.previewImg = '';
+      this.widthImg = 160;
+      this.resize = false;
     },
 
   }
