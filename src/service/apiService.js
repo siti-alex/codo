@@ -2,8 +2,8 @@ import axios from 'axios';
 //import router from '@/router';
 
 
-//const api = 'http://213.87.96.9:6006';
-const api = 'http://192.168.202.104:8080';
+const api = 'http://213.87.96.9:6006';
+//const api = 'http://192.168.202.104:8080';
 
 
 const baseURL = `${api}`;
@@ -37,21 +37,12 @@ const API = axios.create({
 
 export default {
     api,
-    // getFullPath(id) {
-    //     return API.get(`/section/getFullRoute?id=${id}`);
-    // },
-    // getSections() {
-    //     return API.get('/section/tree');
-    // },
-    // setHtml(html) {
-    //     return API.post('/section/setHTML/', html)
-    // },
 
     getAllStudents(){
-        return API.get(`/student/getAllStudents`);
+        return API.get(`/student/getAll`);
     },
     deleteNewsById(id){
-        return API.get(`/news/delete?id=${id}`);
+        return API.get(`/news/${id}/delete`);
     },
     getAllNews(){
         return API.get(`/news/getAll`);
@@ -60,7 +51,7 @@ export default {
         return API.post(`/news/upload`, news);
     },
     getNewsById(id){
-        return API.get(`/news/getById?id=${id}`);
+        return API.get(`/news/${id}`);
     },
     ChangeNews(news){
         return API.post(`/news/update`, news);
@@ -69,6 +60,7 @@ export default {
         return API.post(`/image/upload`, img);
     },
 
-
+//http://адрес:порт/news/{id}/delete
+    //return API.get(`/news/delete?id=${id}`);
 
 }

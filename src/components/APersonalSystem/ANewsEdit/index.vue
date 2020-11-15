@@ -12,7 +12,7 @@
         //v-col(v-for='n in 8' cols='4')
         v-col(v-for='newses in news' :key="newses.id" cols='4')
           v-card.mx-5
-            v-img.white--text.align-end(height='200px' :src='serverIp+`/news/getImage?id=`+newses.image.id')
+            v-img.white--text.align-end(height='200px' :src='serverIp+`/image/`+newses.image.id')
               v-card-title {{newses.head}}
             v-card-subtitle.pb-0
               | {{newses.date}}

@@ -15,7 +15,7 @@
           v-col(cols='4')
             v-divider
             v-card(outlined='' elevation="19" tile='').pa-3.mx-3.mt-3
-              v-img.white--text.align-end(height='200px' :src='serverIp+`/news/getImage?id=`+NewsSrc.image.id' v-if="NewsSrc.image")
+              v-img.white--text.align-end(height='200px' :src='serverIp+`/image/`+NewsSrc.image.id' v-if="NewsSrc.image")
                 v-card-title
                   v-text-field(label="Заголовок" dark='' v-model="NewsSrc.head").title
               v-card-subtitle().pb-0
@@ -61,7 +61,6 @@ name: "ChangeNews",
       formdata.append("fullText", this.NewsSrc.fullText);
       formdata.append("id", this.NewsSrc.id);
       Api.ChangeNews(formdata).then(() => {
-        //console.log(result.data);
         this.$emit('update');
       });
       this.dialog = !this.dialog;
