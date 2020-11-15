@@ -4,8 +4,8 @@ div
     v-card-title.justify-center Мероприятия
     v-divider
     v-card-title.justify-center.subtitle-2 Ближайшие события
-    v-row
-      v-col(v-for='item in cards.slice(0, 3)' cols='4')
+    v-row(v-if="event")
+      v-col(v-for='item in event.slice(0, 3)' cols='4')
         v-card(tile='' height='100%' hover='' @click="").mx-5
           v-img.white--text.align-end(height='150px' src='https://cdn.vuetifyjs.com/images/cards/docks.jpg')
             v-card-title {{item.head}}
@@ -13,7 +13,7 @@ div
             v-chip(color='deep-purple' dark='' small='').mb-1
               | {{item.date}}
           v-card-text()
-            | {{item.text}}
+            | {{item.previewText}}
     v-divider
     //v-card(width='45%').ml-5
     v-card-title.justify-center.subtitle-2 Календарь мероприятий
@@ -32,13 +32,14 @@ div
             v-chip(color='deep-purple' dark='').ml-3
               | {{cardEvent.date}}
             v-card-text.text--primary
-              div {{cardEvent.text}}
+              div {{cardEvent.previewText}}
       v-col(cols='1')
     br
   br
 </template>
 
 <script>
+import Api from "@/service/apiService";
 export default {
 name: "AEvents",
   data: () => ({
@@ -47,37 +48,44 @@ name: "AEvents",
     curDate: [],
     cardEvent: null,
 
-
-    cards: [
-      {
-        head: 'Открытие ОКЦ',
-        text: '12-13 ноября состоится главное национальное деловое событие в мире качества - онлайн-форум «Всемирный день качества - 2020». Мероприятие форума будет бесплатным для участников и соберет аудиторию более 30 000 человек.',
-        date: '2020-11-15',
-      },
-      {
-        head: 'Масленица',
-        text: 'Городской молодежный медиафорум «Медиаskills» пройдет 3 декабря 2020 года. Он предназначен для представителей молодежи в возрасте от 14 до 30 лет уже имеющих базовые навыки и знания в сфере медиа, а также минимальный опыт работы в рамках своей специализации. Заявки принимаются до 11 ноября 2020 года.',
-        date: '2020-11-20',
-      },
-      {
-        head: 'Поход в музей',
-        text: 'До 12 ноября принимаются заявки на проведение всероссийского отбора лучших педагогических практик "Учительская онлайн-лаборатория Рыбаков фонда". В рамках конкурса участникам предстоит создать интерактивный онлайн-урок. Участие в конкурсе бесплатное',
-        date: '2020-11-25',
-      },
-      {
-        head: 'Тестовый хеад',
-        text: 'Текстовый текст',
-        date: '2020-11-26',
-      }
-    ]
+    event: null,
+    // cards: [
+    //   {
+    //     head: 'Открытие ОКЦ',
+    //     text: '12-13 ноября состоится главное национальное деловое событие в мире качества - онлайн-форум «Всемирный день качества - 2020». Мероприятие форума будет бесплатным для участников и соберет аудиторию более 30 000 человек.',
+    //     date: '2020-11-15',
+    //   },
+    //   {
+    //     head: 'Масленица',
+    //     text: 'Городской молодежный медиафорум «Медиаskills» пройдет 3 декабря 2020 года. Он предназначен для представителей молодежи в возрасте от 14 до 30 лет уже имеющих базовые навыки и знания в сфере медиа, а также минимальный опыт работы в рамках своей специализации. Заявки принимаются до 11 ноября 2020 года.',
+    //     date: '2020-11-20',
+    //   },
+    //   {
+    //     head: 'Поход в музей',
+    //     text: 'До 12 ноября принимаются заявки на проведение всероссийского отбора лучших педагогических практик "Учительская онлайн-лаборатория Рыбаков фонда". В рамках конкурса участникам предстоит создать интерактивный онлайн-урок. Участие в конкурсе бесплатное',
+    //     date: '2020-11-25',
+    //   },
+    //   {
+    //     head: 'Тестовый хеад',
+    //     text: 'Текстовый текст',
+    //     date: '2020-11-26',
+    //   }
+    // ]
   }),
   methods: {
+    getEvents() {
+      Api.getEvents().then(result => {
+        this.event = result.data;
+        console.log(this.event);
+        this.sampleDates();
+      })
+    },
     getAllowedDates (val) {
       return this.dates.indexOf(val) !== -1;
     },
     selectEvent(){
       this.date = this.curDate.filter(x => !this.dates.includes(x));
-      this.cards.forEach(element => {
+      this.event.forEach(element => {
         if(element.date === this.date[0]) {
           this.cardEvent = element;
         }
@@ -85,14 +93,15 @@ name: "AEvents",
       this.dates = this.curDate;
     },
     sampleDates() {
-      this.cards.forEach(element => {
+      this.event.forEach(element => {
         this.dates.push(element.date)
         this.curDate.push(element.date)
       });
     },
   },
-  created() {
-    this.sampleDates();
+  mounted() {
+    this.getEvents();
+    //this.sampleDates();
   }
 }
 </script>

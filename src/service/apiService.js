@@ -59,6 +59,12 @@ export default {
     UploadImage(img){
         return API.post(`/image/upload`, img);
     },
+    getEvents(){
+        return API.get(`/event/getActual`);
+    },
+    uploadEvent(event){
+        return API.post(`/event/upload`, event);
+    },
 
 //http://адрес:порт/news/{id}/delete
     //return API.get(`/news/delete?id=${id}`);

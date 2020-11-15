@@ -8,8 +8,8 @@ div
           v-toolbar-title Создание новости
           v-spacer
           v-toolbar-items
-            v-btn(dark='' text='' @click='uploadNews')
-              | Сохранить
+            v-btn(dark='' text='' @click='uploadNews' v-if="!radioGroup") Сохранить
+            v-btn(dark='' text='' @click='uploadEvent' v-if="radioGroup") Сохранить мероприятие
         v-divider
         v-row(no-gutters='').mx-5.mt-3
           v-col(cols='4')
@@ -109,6 +109,21 @@ name: "AddNews",
         this.showDialog();
       });
 
+    },
+    uploadEvent(){
+      console.log("Я мероприятие");
+      let formdata = new FormData();
+      formdata.append("head", this.newPost.title);
+      formdata.append("previewText", this.newPost.text);
+      formdata.append("fullText", this.newPost.html);
+      formdata.append("file", this.newPost.img);
+      formdata.append("date", this.date);
+      Api.uploadEvent(formdata).then((result) => {
+        console.log(result);
+        //this.dialog = !this.dialog;
+        //this.newPost.img = `http://213.87.96.9:6006/news/getImage?id=${result.data}`
+        this.showDialog();
+      });
     },
   }
 }
