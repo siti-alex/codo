@@ -101,7 +101,7 @@ name: "AddNews",
       formdata.append("previewText", this.newPost.text);
       formdata.append("fullText", this.newPost.html);
       formdata.append("file", this.newPost.img);
-      Api.setNews(formdata).then(result => {
+      Api.setNews(formdata).then(() => {
         //console.log(result.data);
         //this.dialog = !this.dialog;
         //this.newPost.img = `http://213.87.96.9:6006/news/getImage?id=${result.data}`
