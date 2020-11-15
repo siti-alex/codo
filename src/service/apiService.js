@@ -53,8 +53,8 @@ export default {
     getNewsById(id){
         return API.get(`/news/${id}`);
     },
-    ChangeNews(news){
-        return API.post(`/news/update`, news);
+    ChangeNews(news, id){
+        return API.post(`/news/${id}/update`, news);
     },
     UploadImage(img){
         return API.post(`/image/upload`, img);

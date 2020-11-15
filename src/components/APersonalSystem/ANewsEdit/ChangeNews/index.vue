@@ -60,7 +60,7 @@ name: "ChangeNews",
       formdata.append("previewText", this.NewsSrc.previewText);
       formdata.append("fullText", this.NewsSrc.fullText);
       formdata.append("id", this.NewsSrc.id);
-      Api.ChangeNews(formdata).then(() => {
+      Api.ChangeNews(formdata,this.NewsSrc.id).then(() => {
         this.$emit('update');
       });
       this.dialog = !this.dialog;
