@@ -20,6 +20,10 @@
                                     v-text-field(label="Заголовок" dark='' v-model="EventSrc.head").title
                             v-card-subtitle().pb-0
                                 | {{EventSrc.date}}
+                            v-menu(v-model='menu2' :close-on-content-click='false' :nudge-right='40' transition='scale-transition' offset-y='' min-width='290px')
+                              template(v-slot:activator='{ on, attrs }')
+                                v-text-field(v-model='EventSrc.date' label='Выберите дату' prepend-icon='mdi-calendar' readonly='' v-bind='attrs' v-on='on')
+                              v-date-picker(v-model='EventSrc.date' @input='menu2 = false' locale='ru-ru')
                             v-card-text.pa-0.text--primary
                                 v-divider
                                 v-textarea(auto-grow='' value='Текст' v-model="EventSrc.previewText" autofocus='')
@@ -47,6 +51,10 @@
         data:()=> ({
             dialog: false,
             serverIp: Api.api,
+            //date: new Date().toISOString().substr(0, 10),
+            menu: false,
+            modal: false,
+            menu2: false,
 
         }),
         methods: {
@@ -54,12 +62,13 @@
                 this.dialog = !this.dialog;
                 //console.log(this.NewsSrc);
             },
-            uploadNews(){
+            uploadEvent(){
                 let formdata = new FormData();
                 formdata.append("head", this.EventSrc.head);
                 formdata.append("previewText", this.EventSrc.previewText);
                 formdata.append("fullText", this.EventSrc.fullText);
                 formdata.append("id", this.EventSrc.id);
+                formdata.append("date", this.EventSrc.date);
                 Api.ChangeEvent(formdata,this.EventSrc.id).then(() => {
                     this.$emit('update');
                 });

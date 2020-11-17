@@ -21,7 +21,7 @@
                         v-divider
                         v-card-actions
                             //v-btn(text='' color='deep-purple accent-4' @click='showChangeNews(news.indexOf(newses))')
-                            v-btn(text='' color='deep-purple accent-4' @click='showChangeEvent(); curNews = event')
+                            v-btn(text='' color='deep-purple accent-4' @click='showChangeEvent(); curEvent = event')
                                 | Изменить
                             //v-btn(text='' color='red darken-4' @click="deleteNews(newses.indexOf(news))")
                             v-spacer
