@@ -77,15 +77,15 @@
                         console.log('Ошибка');
                     });
             },
-            // deleteEvent(){
-            //     Api.deleteNewsById(this.newsId).then(() => {
-            //             this.getAllNews();
-            //         },
-            //         () => {
-            //             console.log('Ошибка');
-            //         });
-            //
-            // }
+            deleteEvent(){
+                Api.deleteEventById(this.eventId).then(() => {
+                        this.getAllEvents();
+                    },
+                    () => {
+                        console.log('Ошибка');
+                    });
+
+            }
         },
         mounted() {
             this.getAllEvents();

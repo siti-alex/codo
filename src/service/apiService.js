@@ -65,6 +65,9 @@ export default {
     uploadEvent(event){
         return API.post(`/event/upload`, event);
     },
+    deleteEventById(id){
+        return API.get(`/event/${id}/delete`);
+    },
 
 //http://адрес:порт/news/{id}/delete
     //return API.get(`/news/delete?id=${id}`);
