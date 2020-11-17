@@ -7,7 +7,7 @@ div
     v-row(v-if="event")
       v-col(v-for='item in event.slice(0, 3)' cols='4')
         v-card(tile='' height='100%' hover='' @click="").mx-5
-          v-img.white--text.align-end(height='150px' src='https://cdn.vuetifyjs.com/images/cards/docks.jpg')
+          v-img.white--text.align-end(height='150px' :src='serverIp+`/image/`+item.image.id' v-if="item.image")
             v-card-title {{item.head}}
           v-card-subtitle.pb-0
             v-chip(color='deep-purple' dark='' small='').mb-1
@@ -25,7 +25,7 @@ div
       v-col(cols='6')
         v-card
           v-card(tile='' v-if="cardEvent" @click="")
-            v-img.white--text.align-end(height='200px' src='https://www.amurobl.ru/upload/iblock/5e2/image_21_08_20_02_41_5.jpeg')
+            v-img.white--text.align-end(height='200px' v-if="cardEvent.image" :src='serverIp+`/image/`+cardEvent.image.id')
               v-card-title(style="background-color:#000000; opacity: 0.8; height: 50px").pa-2
                 p.ml-3 {{cardEvent.head}}
             v-card-subtitle.pb-0
@@ -47,6 +47,7 @@ name: "AEvents",
     dates: [],
     curDate: [],
     cardEvent: null,
+      serverIp: Api.api,
 
     event: null,
     // cards: [
