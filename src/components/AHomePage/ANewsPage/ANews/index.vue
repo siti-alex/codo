@@ -6,7 +6,10 @@ div
     v-btn(tile='', small='' dark='' color="#8b2639" to="/home/news")
       v-icon mdi-keyboard-backspace
       | Вернуться
-    v-sheet(width='90%' height='100%' v-html="text").mx-auto.mt-5
+    v-sheet(width='90%' height='100%' v-html="text").mx-auto.mt-5.mb-5
+
+    v-divider
+    br
     //div(v-html="text")
 
 

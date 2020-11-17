@@ -27,6 +27,7 @@ name: "APersonalSystem",
       ['mdi-newspaper', 'Расписание'],
       ['mdi-send', 'Журнал'],
       ['mdi-pencil-box-outline', 'Редактор новостей', '/personal/edit-news'],
+      ['mdi-instagram', 'Редактор мероприятий', '/personal/edit-event'],
     ],
   }),
   methods: {
