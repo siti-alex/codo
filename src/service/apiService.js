@@ -68,6 +68,9 @@ export default {
     deleteEventById(id){
         return API.get(`/event/${id}/delete`);
     },
+    ChangeEvent(event, id){
+        return API.post(`/event/${id}/update`, event);
+    },
 
 //http://адрес:порт/news/{id}/delete
     //return API.get(`/news/delete?id=${id}`);

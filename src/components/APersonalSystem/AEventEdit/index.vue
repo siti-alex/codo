@@ -45,15 +45,17 @@
                             | Удалить
 
         add-event(ref="AddEvent" @update = "getAllEvents")
+        change-event(ref="ChangeEvent" :EventSrc="curEvent" @update = "getAllEvents")
 </template>
 
 <script>
     import Api from "@/service/apiService";
     import AddEvent from "./AddEvent/index";
+    import ChangeEvent from "./ChangeEvent/index";
 
     export default {
         name: "AEventEdit",
-        components: {AddEvent},
+        components: {ChangeEvent, AddEvent},
         data:() => ({
             dialog: false,
             eventId: 0,
@@ -66,6 +68,7 @@
                 this.$refs.AddEvent.showDialog();
             },
             showChangeEvent(){
+                console.log(this.curEvent);
                 this.$refs.ChangeEvent.showDialog();
             },
             getAllEvents(){
