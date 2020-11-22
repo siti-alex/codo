@@ -3,7 +3,7 @@
         v-card.mx-auto(height='100%' width='95%' elevation="6")
             //v-btn(color='primary' fab='' x-small='').float-lg-right.mx-5.mt-5
               v-icon mdi-plus
-            v-card-title.justify-center Редактирование новостей
+            v-card-title.justify-center Редактирование мероприятий
                 v-spacer
                 v-btn(color='#a25161' small='' dark='' right='' tile='' @click="showEvent").ml-5 Добавить
                     v-icon mdi-comment-plus-outline
