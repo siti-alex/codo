@@ -170,7 +170,7 @@ export default {
       this.$refs.aInsertImage.showDialog();
     },
     insertImage(file){
-
+        //console.log(file);
       this.exec('insertHTML', false, file);
       this.exec('insertHTML', false, '<div></div>');
     },
