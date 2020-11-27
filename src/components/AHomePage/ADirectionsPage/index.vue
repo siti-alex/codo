@@ -4,7 +4,7 @@ div
     v-card-title.justify-center Направления
     v-divider
     v-card(:loading='loading')
-      v-tabs(vertical='' grow='' v-model="tab")
+      v-tabs(vertical='' grow='' hide-slider='' v-model="tab")
         v-tab(v-for="item in directions" :key="item.id" @click="getInfo(item.dir)").subtitle-2
           div(v-html='item.head')
         //v-divider
@@ -67,19 +67,21 @@ name: "ADirectionsPage",
             axios
                 .get(dir)
                 .then(response => {
-                    console.log(response);
+                    //console.log(response);
                     this.info = response.data.htmlCode;
                     this.loading = false;
                 })
         },
     },
     mounted() {
+        this.loading = true;
         axios
             //.get('https://cms.lit.bgpu.ru/public/get/public/codo-site/exam-courses/')
             .get('https://cms.lit.bgpu.ru/public/get/public/codo-site/shiya/')
             .then(response => {
-                console.log(response);
+                //console.log(response);
                 this.info = response.data.htmlCode
+                this.loading = false;
             })
     }
 }
