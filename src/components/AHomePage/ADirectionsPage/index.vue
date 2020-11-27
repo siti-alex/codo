@@ -69,6 +69,7 @@ name: "ADirectionsPage",
     },
     methods: {
         getSchoolIns(){
+            this.info = null;
             this.loading = true;
             axios
                 .get('https://cms.lit.bgpu.ru/public/get/public/codo-site/shiya/')
@@ -79,6 +80,7 @@ name: "ADirectionsPage",
                 })
         },
         getSchoolProg(){
+            this.info = null;
             this.loading = true;
             axios
                 .get('https://cms.lit.bgpu.ru/public/get/public/codo-site/shprogandrobot/')
@@ -99,6 +101,7 @@ name: "ADirectionsPage",
                 })
         },
         getCrujki(){
+            this.info = null;
             this.loading = true;
             axios
                 .get('https://cms.lit.bgpu.ru/public/get/public/codo-site/olymp-courses/')
@@ -109,6 +112,7 @@ name: "ADirectionsPage",
                 })
         },
         getProgrmStarsh(){
+            this.info = null;
             this.loading = true;
             axios
                 .get('https://cms.lit.bgpu.ru/public/get/public/codo-site/for-high-school/')
@@ -119,6 +123,7 @@ name: "ADirectionsPage",
                 })
         },
         getRepetic(){
+            this.info = null;
             this.loading = true;
             axios
                 .get('https://cms.lit.bgpu.ru/public/get/public/codo-site/test-exam/')
