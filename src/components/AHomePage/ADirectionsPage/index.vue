@@ -3,7 +3,7 @@ div
   v-card.mx-auto(height='100%' width='100%' elevation="6")
     v-card-title.justify-center Направления
     v-divider
-    v-card
+    v-card(:loading='loading')
       v-tabs(vertical='' grow='')
         v-tab(@click="getSchoolIns").subtitle-2
           |         Школа иностранных языков
@@ -42,6 +42,18 @@ div
           v-card(flat='')
             v-card-text
                 div(v-html="info") {{info}}
+        v-tab-item
+            v-card(flat='')
+                v-card-text
+                    div(v-html="info") {{info}}
+        v-tab-item
+            v-card(flat='')
+                v-card-text
+                    div(v-html="info") {{info}}
+        v-tab-item
+            v-card(flat='')
+                v-card-text
+                    div(v-html="info") {{info}}
   br
 </template>
 
@@ -52,55 +64,68 @@ name: "ADirectionsPage",
     data () {
         return {
            info: null,
+            loading: false,
         }
     },
     methods: {
         getSchoolIns(){
+            this.loading = true;
             axios
                 .get('https://cms.lit.bgpu.ru/public/get/public/codo-site/shiya/')
                 .then(response => {
                     console.log(response);
-                    this.info = response.data.htmlCode
+                    this.info = response.data.htmlCode;
+                    this.loading = false;
                 })
         },
         getSchoolProg(){
+            this.loading = true;
             axios
                 .get('https://cms.lit.bgpu.ru/public/get/public/codo-site/shprogandrobot/')
                 .then(response => {
                     console.log(response);
-                    this.info = response.data.htmlCode
+                    this.info = response.data.htmlCode;
+                    this.loading = false;
                 })
         },
         getPredmCours(){
+            this.loading = true;
             axios
                 .get('https://cms.lit.bgpu.ru/public/get/public/codo-site/exam-courses/')
                 .then(response => {
                     console.log(response);
-                    this.info = response.data.htmlCode
+                    this.info = response.data.htmlCode;
+                    this.loading = false;
                 })
         },
         getCrujki(){
+            this.loading = true;
             axios
                 .get('https://cms.lit.bgpu.ru/public/get/public/codo-site/olymp-courses/')
                 .then(response => {
                     console.log(response);
-                    this.info = response.data.htmlCode
+                    this.info = response.data.htmlCode;
+                    this.loading = false;
                 })
         },
         getProgrmStarsh(){
+            this.loading = true;
             axios
                 .get('https://cms.lit.bgpu.ru/public/get/public/codo-site/for-high-school/')
                 .then(response => {
                     console.log(response);
                     this.info = response.data.htmlCode
+                    this.loading = false;
                 })
         },
         getRepetic(){
+            this.loading = true;
             axios
                 .get('https://cms.lit.bgpu.ru/public/get/public/codo-site/test-exam/')
                 .then(response => {
                     console.log(response);
-                    this.info = response.data.htmlCode
+                    this.info = response.data.htmlCode;
+                    this.loading = false;
                 })
         },
     },
