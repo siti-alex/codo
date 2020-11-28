@@ -8,7 +8,7 @@
     v-footer(dark='' padless='' style="opacity: 0.9")
       v-card.white--text.text-center(flat='' tile='' width='100%' color="#8b2639")
         v-card-text
-          v-btn.mx-4.white--text(v-for='icon in icons' :key='icon' icon='' :href='icon.href')
+          v-btn.mx-4.white--text(v-for='icon in icons' icon='' :href='icon.href')
             v-icon(size='24px')
               | {{ icon.icon }}
         v-divider
