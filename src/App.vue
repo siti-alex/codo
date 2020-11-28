@@ -5,7 +5,7 @@
       v-spacer
       v-toolbar-title Центр организации довузовского образования при БГПУ
     router-view
-    v-footer(dark='' padless='' style="opacity: 0.9")
+    //v-footer(dark='' padless='' style="opacity: 0.9")
       v-card.white--text.text-center(flat='' tile='' width='100%' color="#8b2639")
         v-card-text.pa-1
           v-btn.mx-4.white--text(v-for='icon in icons' icon='' :href='icon.href')
