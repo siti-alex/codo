@@ -4,9 +4,9 @@ div
     v-card-title.justify-center Направления
     v-divider
     v-card(:loading='loading')
-      v-tabs(vertical='' grow='' hide-slider='' v-model="tab")
-        v-tab(v-for="item in directions" :key="item.id" @click="getInfo(item.dir)").subtitle-2
-          div(v-html='item.head')
+      v-tabs(vertical='' hide-slider=false v-model="tab" )
+        v-tab(v-for="item in directions" :key="item.id" @click="getInfo(item.dir)" style="border-bottom:1px solid #9EC1D4; height: 70px").subtitle-2
+          div(v-html='item.head' )
         //v-divider
         v-tabs-items(v-model="tab")
             v-tab-item(v-for="item in directions" :key="item.id")
