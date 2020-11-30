@@ -16,6 +16,7 @@ import Docs from '../components/AHomePage/ADocsPage/index.vue'
 import About from '../components/AHomePage/AAboutPage/index.vue'
 import News from '../components/AHomePage/ANewsPage/index.vue'
 import NewsId from '../components/AHomePage/ANewsPage/ANews/index.vue'
+import EventId from '../components/AHomePage/AEvents/AEvent/index.vue'
 import Events from '../components/AHomePage/AEvents/index.vue'
 Vue.use(VueRouter)
 
@@ -33,6 +34,11 @@ const routes = [
         path: 'news/:id',
         component: NewsId,
         name: 'NewsId',
+      },
+      {
+        path: 'event/:id',
+        component: EventId,
+        name: 'EventId',
       },
       {
         path: 'events',

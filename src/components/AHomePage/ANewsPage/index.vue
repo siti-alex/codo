@@ -50,6 +50,6 @@ name: "ANewsPage",
 }
 .custom:hover {
     //background: #ff0f1d;
-    border-bottom:5px solid #ff0f1d;
+    border-bottom:5px solid #9b2b40;
 }
 </style>

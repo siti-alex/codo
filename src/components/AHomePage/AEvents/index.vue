@@ -6,7 +6,7 @@ div
     v-card-title.justify-center.subtitle-2 Ближайшие события
     v-row(v-if="event")
       v-col(v-for='item in event.slice(0, 3)' cols='4')
-        v-card(tile='' height='100%' hover='' @click="").mx-5
+        v-card(tile='' height='100%' hover='' @click="" :to="{name: 'EventId', params: { id: item.id}}").mx-5
           v-img.white--text.align-end(height='150px' :src='serverIp+`/image/`+item.image.id' v-if="item.image")
             v-card-title {{item.head}}
           v-card-subtitle.pb-0
@@ -24,7 +24,7 @@ div
         v-date-picker(v-model='dates' multiple='' no-title='' :allowed-dates="getAllowedDates" full-width='' locale="ru-ru" color="#8b2639" elevation='10' @input="selectEvent")
       v-col(cols='6')
         v-card
-          v-card(tile='' v-if="cardEvent" @click="")
+          v-card(tile='' v-if="cardEvent" @click="" :to="{name: 'EventId', params: { id: cardEvent.id}}")
             v-img.white--text.align-end(height='200px' v-if="cardEvent.image" :src='serverIp+`/image/`+cardEvent.image.id')
               v-card-title(style="background-color:#000000; opacity: 0.8; height: 50px").pa-2
                 p.ml-3 {{cardEvent.head}}
