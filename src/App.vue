@@ -49,6 +49,9 @@ export default {
     home(){
       location.href = '/home/news';
     }
+  },
+  mounted() {
+    document.title = 'ЦОДО';
   }
 }
 </script>
