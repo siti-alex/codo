@@ -15,7 +15,7 @@ div
                     div(v-html="info") {{info}}
   br
   v-fab-transition(v-if="top")
-    v-btn(vcolor='pink' dark='' fixed='' bottom='' left='' fab='' @click="toTop" color="#37474F" style="opacity: 0.7")
+    v-btn(vcolor='pink' dark='' fixed='' bottom='' left='' fab='' @click="toTop" color="#37474F" style="opacity: 0.8")
       v-icon mdi-arrow-up
 </template>
 
@@ -82,11 +82,7 @@ name: "ADirectionsPage",
         document.documentElement.scrollTop = 200;
       },
       scrollFunction(){
-        if (document.body.scrollTop > 400 || document.documentElement.scrollTop > 400) {
-                this.top = true;
-              } else {
-                this.top = false;
-              }
+        this.top = document.body.scrollTop > 400 || document.documentElement.scrollTop > 400;
       },
     },
     mounted() {
