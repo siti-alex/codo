@@ -5,13 +5,14 @@ div
     v-divider
     v-row
       v-col(v-for='newses in news' :key='newses.id' cols='4')
-        v-card(tile='' height='100%' hover='' @click="" :to="{name: 'NewsId', params: { id: newses.id}}").mx-5
+        v-card(tile='' height='100%' hover='' @click="" :to="{name: 'NewsId', params: { id: newses.id}}").mx-5.custom
           v-img.white--text.align-end(height='200px' :src='serverIp+`/image/`+newses.image.id')
             v-card-title {{newses.head}}
           v-card-subtitle.pb-0
             | {{newses.date}}
           v-card-text().subtitle-2
             | {{newses.previewText}}
+
           //router-link(:to="{name: 'NewsId', params: { id: newses.id}}")
 
   br
@@ -44,5 +45,11 @@ name: "ANewsPage",
 </script>
 
 <style scoped>
-
+.custom {
+    border-bottom:5px solid #673AB7;
+}
+.custom:hover {
+    //background: #ff0f1d;
+    border-bottom:5px solid #ff0f1d;
+}
 </style>
