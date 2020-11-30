@@ -16,7 +16,8 @@ div
       v-divider
       v-card-text.white--text
         | {{ new Date().getFullYear() }} —
-        strong  Ситиков Алексей
+        strong  Ситиков Алексей,
+        strong  Щеголь Андрей
 </template>
 
 <script>
