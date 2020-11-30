@@ -14,6 +14,9 @@ div
                 v-card-text()
                     div(v-html="info") {{info}}
   br
+  v-fab-transition(v-if="top")
+    v-btn(vcolor='pink' dark='' fixed='' bottom='' left='' fab='' @click="toTop" color="#37474F" style="opacity: 0.7")
+      v-icon mdi-arrow-up
 </template>
 
 <script>
@@ -22,6 +25,7 @@ export default {
 name: "ADirectionsPage",
     data () {
         return {
+            top: false,
             tab: null,
             info: null,
             loading: false,
@@ -72,8 +76,21 @@ name: "ADirectionsPage",
                     this.loading = false;
                 })
         },
+
+      toTop(){
+        document.body.scrollTop = 200;
+        document.documentElement.scrollTop = 200;
+      },
+      scrollFunction(){
+        if (document.body.scrollTop > 400 || document.documentElement.scrollTop > 400) {
+                this.top = true;
+              } else {
+                this.top = false;
+              }
+      },
     },
     mounted() {
+        window.onscroll = () => {this.scrollFunction()};
         this.loading = true;
         axios
             //.get('https://cms.lit.bgpu.ru/public/get/public/codo-site/exam-courses/')
