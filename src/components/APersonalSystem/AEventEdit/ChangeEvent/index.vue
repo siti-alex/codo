@@ -31,7 +31,7 @@
 
                     br
                     v-col(cols='8')
-                        a-c-m-s(v-model="EventSrc.fullText+''" height="650" v-if="dialog")
+                        a-c-m-s(v-model="EventSrc.fullText" height="650" v-if="dialog")
 </template>
 
 <script>
@@ -63,6 +63,8 @@
                 //console.log(this.NewsSrc);
             },
             uploadEvent(){
+                console.log(this.EventSrc.previewText);
+                console.log(this.EventSrc.fullText);
                 let formdata = new FormData();
                 formdata.append("head", this.EventSrc.head);
                 formdata.append("previewText", this.EventSrc.previewText);
