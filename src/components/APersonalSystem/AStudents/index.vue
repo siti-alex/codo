@@ -1,7 +1,11 @@
 <template lang="pug">
 div
+  v-row
+    v-col
+    v-col
+      v-text-field(label='Поиск' prepend-icon='mdi-account-search')
   v-card().mb-5
-    v-subheader Направление
+    v-subheader.subtitle-1 Школьники
     v-expansion-panels(accordion='' focusable='')
       v-expansion-panel(v-for='student in students' :key='student.id' cols='12' link='')
         v-expansion-panel-header {{student.fio}}

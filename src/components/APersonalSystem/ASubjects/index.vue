@@ -1,7 +1,7 @@
 <template lang="pug">
     div
         v-card().mb-5
-            v-subheader Предметы
+            v-subheader.subtitle-1 Предметы
             v-expansion-panels(accordion='' focusable='')
                 v-expansion-panel(v-for='subject in subjects' :key='subject.id' cols='12' link='')
                     v-expansion-panel-header {{subject.name}}

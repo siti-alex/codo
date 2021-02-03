@@ -11,7 +11,7 @@
           v-list-item-content
             v-list-item-title {{ text }}
     v-main
-      v-container.py-8.px-6(fluid='')
+      //v-container.py-8.px-6(fluid='')
       router-view
 
 </template>
