@@ -8,7 +8,7 @@
                     v-toolbar-title Создание мероприятия
                     v-spacer
                     v-toolbar-items
-                        v-btn(dark='' text='' @click='uploadEvent') Сохранить
+                        v-btn(dark='' text='' @click='uploadEvent' :loading="loadBtn") Сохранить
                 v-divider
                 v-row(no-gutters='').mx-5.mt-3
                     v-col(cols='4')
@@ -54,6 +54,7 @@
             menu: false,
             modal: false,
             menu2: false,
+            loadBtn: false,
 
             radioGroup: true,
 
@@ -87,6 +88,7 @@
             },
 
             uploadEvent(){
+                this.loadBtn = true;
                 let formdata = new FormData();
                 formdata.append("head", this.newPost.title);
                 formdata.append("previewText", this.newPost.text);
@@ -98,6 +100,7 @@
                     //this.dialog = !this.dialog;
                     //this.newPost.img = `http://213.87.96.9:6006/news/getImage?id=${result.data}`
                     this.$emit('update');
+                    this.loadBtn = false;
                     this.showDialog();
                 });
             },

@@ -23,7 +23,7 @@ name: "APersonalSystem",
   data: () => ({
     links: [
       ['mdi-school', 'Школьники', '/personal/students'],
-      ['mdi-book-open', 'Предметы'],
+      ['mdi-book-open', 'Предметы', '/personal/subjects'],
       ['mdi-newspaper', 'Расписание'],
       ['mdi-notebook-outline', 'Журнал'],
       ['mdi-pencil-box-outline', 'Редактор новостей', '/personal/edit-news'],

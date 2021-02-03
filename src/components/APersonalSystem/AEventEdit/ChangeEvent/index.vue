@@ -8,7 +8,7 @@
                     v-toolbar-title Изменение мероприятия
                     v-spacer
                     v-toolbar-items
-                        v-btn(dark='' text='' @click='uploadEvent')
+                        v-btn(dark='' text='' @click='uploadEvent' :loading="loadBtn")
                             | Сохранить
                 v-divider
                 v-row(no-gutters='').mx-5.mt-3
@@ -55,7 +55,7 @@
             menu: false,
             modal: false,
             menu2: false,
-
+            loadBtn: false,
         }),
         methods: {
             showDialog(){
@@ -63,6 +63,7 @@
                 //console.log(this.NewsSrc);
             },
             uploadEvent(){
+                this.loadBtn = true;
                 console.log(this.EventSrc.previewText);
                 console.log(this.EventSrc.fullText);
                 let formdata = new FormData();
@@ -73,8 +74,10 @@
                 formdata.append("date", this.EventSrc.date);
                 Api.ChangeEvent(formdata,this.EventSrc.id).then(() => {
                     this.$emit('update');
+                    this.loadBtn = false;
+                    this.dialog = !this.dialog;
                 });
-                this.dialog = !this.dialog;
+
             },
         }
     }

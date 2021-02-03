@@ -8,7 +8,7 @@
           v-toolbar-title Изменение новости
           v-spacer
           v-toolbar-items
-            v-btn(dark='' text='' @click='uploadNews')
+            v-btn(dark='' text='' @click='uploadNews' :loading="loadBtn")
               | Сохранить
         v-divider
         v-row(no-gutters='').mx-5.mt-3
@@ -27,7 +27,7 @@
 
           br
           v-col(cols='8')
-            a-c-m-s(v-model="NewsSrc.fullText+''" height="650" v-if="dialog")
+            a-c-m-s(v-model="NewsSrc.fullText" height="650" v-if="dialog")
 </template>
 
 <script>
@@ -47,6 +47,7 @@ name: "ChangeNews",
   data:()=> ({
     dialog: false,
     serverIp: Api.api,
+      loadBtn: false,
 
   }),
   methods: {
@@ -55,6 +56,7 @@ name: "ChangeNews",
       //console.log(this.NewsSrc);
     },
     uploadNews(){
+        this.loadBtn = true;
       let formdata = new FormData();
       formdata.append("head", this.NewsSrc.head);
       formdata.append("previewText", this.NewsSrc.previewText);
@@ -62,8 +64,10 @@ name: "ChangeNews",
       formdata.append("id", this.NewsSrc.id);
       Api.ChangeNews(formdata,this.NewsSrc.id).then(() => {
         this.$emit('update');
+        this.loadBtn = false;
+        this.dialog = !this.dialog;
       });
-      this.dialog = !this.dialog;
+
     },
   }
 }

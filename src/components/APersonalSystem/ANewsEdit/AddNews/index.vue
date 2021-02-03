@@ -8,8 +8,8 @@ div
           v-toolbar-title Создание новости
           v-spacer
           v-toolbar-items
-            v-btn(dark='' text='' @click='uploadNews' v-if="!radioGroup") Сохранить
-            v-btn(dark='' text='' @click='uploadEvent' v-if="radioGroup") Сохранить мероприятие
+            v-btn(dark='' text='' @click='uploadNews' v-if="!radioGroup" :loading="loadBtn") Сохранить
+            v-btn(dark='' text='' @click='uploadEvent' v-if="radioGroup" :loading="loadBtn") Сохранить
         v-divider
         v-row(no-gutters='').mx-5.mt-3
           v-col(cols='4')
@@ -63,6 +63,7 @@ name: "AddNews",
     menu: false,
     modal: false,
     menu2: false,
+      loadBtn: false,
 
     radioGroup: true,
 
@@ -95,6 +96,7 @@ name: "AddNews",
       console.log(this.newPost.html);
     },
     uploadNews(){
+        this.loadBtn = true;
       console.log(this.newPost);
       let formdata = new FormData();
       formdata.append("head", this.newPost.title);
@@ -106,11 +108,13 @@ name: "AddNews",
         //this.dialog = !this.dialog;
         //this.newPost.img = `http://213.87.96.9:6006/news/getImage?id=${result.data}`
         this.$emit('update');
+        this.loadBtn = false;
         this.showDialog();
       });
 
     },
     uploadEvent(){
+        this.loadBtn = true;
       console.log("Я мероприятие");
       let formdata = new FormData();
       formdata.append("head", this.newPost.title);
@@ -122,6 +126,7 @@ name: "AddNews",
         console.log(result);
         //this.dialog = !this.dialog;
         //this.newPost.img = `http://213.87.96.9:6006/news/getImage?id=${result.data}`
+          this.loadBtn = false;
         this.showDialog();
       });
     },

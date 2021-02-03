@@ -41,6 +41,9 @@ export default {
     getAllStudents(){
         return API.get(`/student/getAll`);
     },
+    getAllSubjects(){
+        return API.get(`/discipline/getAll`);
+    },
     deleteNewsById(id){
         return API.get(`/news/${id}/delete`);
     },
