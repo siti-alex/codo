@@ -8,19 +8,12 @@
                     v-expansion-panel-content
                         v-card(flat='')
                             v-card-title.subtitle-2 Информация
-                            v-card-text(@click="") Учитель: {{subject.teacher}}
-                            v-card-text Кабинет: №215
-                            v-card-text Стоимость посещения: {{subject.cost}}
+                                v-card-text.pb-0 Учитель: {{subject.teacher}}
+                                v-card-text.pb-0 Кабинет: №215
+                                v-card-text.pb-0 Стоимость посещения: {{subject.cost}} руб.
+                            v-btn(color='primary' fab='' x-small='').float-lg-right
+                                v-icon mdi-pencil
 
-                        //h2.subtitle-2
-                            | Информация
-                        //v-chip-group(column='')
-                            v-chip(outlined='')
-                                | {{subject.cost}}
-                            v-chip(outlined='')
-                                | {{subject.teacher}}
-                        //v-btn(color='primary' fab='' x-small='').float-lg-right
-                            v-icon mdi-pencil
 </template>
 
 <script>
