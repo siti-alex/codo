@@ -8,7 +8,7 @@ div
     v-subheader.subtitle-1 Школьники
     v-expansion-panels(accordion='' focusable='')
       v-expansion-panel(v-for='student in students' :key='student.id' cols='12' link='')
-        v-expansion-panel-header {{student.fio}}
+        v-expansion-panel-header(@click="getDisciplinesByUser(student.id)") {{student.fio}}
           template(v-if="student.id%2==0" v-slot:actions='')
             v-icon(color='error')
               | mdi-alert-circle
@@ -16,8 +16,8 @@ div
           h2.subtitle-2.mt-2
             | Подписаные предметы
           v-chip-group(column='')
-            v-chip(outlined='' v-for="tag in tags" :key="tag")
-              | {{tag}}
+            v-chip(outlined='' v-for="discipline in disciplines" :key="discipline.id")
+              | {{discipline.name}}
           v-divider
           h2.subtitle-2.mt-3  Общая информация
           v-row
@@ -28,7 +28,7 @@ div
             v-col
               p.caption Номер телефона: {{student.phoneNumber}}
 
-          v-btn(color='primary' fab='' x-small='').float-lg-right
+          v-btn(color='primary' fab='' x-small='').float-right
             v-icon mdi-pencil
 </template>
 
@@ -41,6 +41,7 @@ name: "AStudents",
     cards: ['Физико-матетиматический', 'Естественно-географический'],
 
     students: [],
+    disciplines: [],
 
     tags: [
       'Русский язык',
@@ -61,6 +62,16 @@ name: "AStudents",
             console.log('Ошибка');
           });
     },
+      getDisciplinesByUser(id) {
+          Api.getDisciplinesByUser(id).then(value => {
+                  this.disciplines = value.data;
+                  console.log(this.disciplines)
+                  console.log(value)
+              },
+              () => {
+                  console.log('Ошибка');
+              });
+      },
   },
   mounted() {
     this.getAllStudents();

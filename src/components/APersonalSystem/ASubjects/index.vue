@@ -2,6 +2,8 @@
     div
         v-card().mb-5
             v-subheader.subtitle-1 Предметы
+              v-btn(icon='' color="#8b2639" @click="showNewSubjectForm").float-right
+                v-icon mdi-plus
             v-expansion-panels(accordion='' focusable='')
                 v-expansion-panel(v-for='subject in subjects' :key='subject.id' cols='12' link='')
                     v-expansion-panel-header {{subject.name}}
@@ -14,12 +16,15 @@
                             v-btn(color='primary' fab='' x-small='').float-lg-right
                                 v-icon mdi-pencil
 
+        ANewSubjectForm(ref="aNewSubjectForm" )
 </template>
 
 <script>
     import Api from "@/service/apiService";
+    import ANewSubjectForm from "./ANewSubjectForm/index";
     export default {
         name: "ASubjects",
+        components: {ANewSubjectForm},
         data () {
             return {
                 subjects: [],
@@ -34,6 +39,9 @@
                     () => {
                     console.log("Ошибка");
                     });
+            },
+            showNewSubjectForm() {
+                this.$refs.aNewSubjectForm.showDialog();
             },
         },
         mounted() {

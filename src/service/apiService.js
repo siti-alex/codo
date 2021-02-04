@@ -41,6 +41,9 @@ export default {
     getAllStudents(){
         return API.get(`/student/getAll`);
     },
+    getDisciplinesByUser(id){
+        return API.get(`/student/${id}/getDisciplines`);
+    },
     getAllSubjects(){
         return API.get(`/discipline/getAll`);
     },
