@@ -1,11 +1,11 @@
 <template lang="pug">
     div
-        v-card().mb-5
+        v-card(:loading='loading').mb-5
             v-subheader.subtitle-1 Предметы
               v-btn(icon='' color="#8b2639" @click="showNewSubjectForm").float-right
                 v-icon mdi-plus
             v-expansion-panels(accordion='' focusable='')
-                v-expansion-panel(v-for='subject in subjects' :key='subject.id' cols='12' link='')
+                v-expansion-panel(v-for='subject in subjects' :key='subject.id' cols='12' link='' v-if="!loading")
                     v-expansion-panel-header {{subject.name}}
                     v-expansion-panel-content
                         v-card(flat='')
@@ -28,16 +28,20 @@
         data () {
             return {
                 subjects: [],
+                loading: false,
             }
         },
         methods: {
             getAllSubjects(){
+                this.loading = true;
                 Api.getAllSubjects().then(value => {
                         this.subjects = value.data;
                         console.log(value.data);
+                        this.loading = false;
                     },
-                    () => {
-                    console.log("Ошибка");
+                    (error) => {
+                        console.log(error);
+                        this.loading = false;
                     });
             },
             showNewSubjectForm() {

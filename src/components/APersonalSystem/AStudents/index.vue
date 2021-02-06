@@ -4,10 +4,10 @@ div
     v-col
     v-col
       v-text-field(label='Поиск' prepend-icon='mdi-account-search')
-  v-card().mb-5
+  v-card(:loading='loading').mb-5
     v-subheader.subtitle-1 Школьники
     v-expansion-panels(accordion='' focusable='')
-      v-expansion-panel(v-for='student in students' :key='student.id' cols='12' link='')
+      v-expansion-panel(v-for='student in students' :key='student.id' cols='12' link='' v-if="!loading")
         v-expansion-panel-header(@click="getDisciplinesByUser(student.id)") {{student.fio}}
           template(v-if="student.id%2==0" v-slot:actions='')
             v-icon(color='error')
@@ -38,31 +38,26 @@ import Api from "@/service/apiService";
 export default {
 name: "AStudents",
   data: () => ({
-    cards: ['Физико-матетиматический', 'Естественно-географический'],
 
     students: [],
     disciplines: [],
+    loading: false,
 
-    tags: [
-      'Русский язык',
-      'Экономика',
-      'Музыка',
-      'География',
-      'Информатика',
-      'Экология',
-    ],
   }),
   methods: {
     showDisciplineForm(){
         alert("Че смотришь, мем только строится еще")
     },
     getAllStudents() {
+      this.loading = true;
       Api.getAllStudents().then(value => {
             this.students = value.data;
             console.log(this.students)
+            this.loading = false;
           },
-          () => {
-            console.log('Ошибка');
+          (error) => {
+            console.log(error);
+            this.loading = false;
           });
     },
       getDisciplinesByUser(id) {
