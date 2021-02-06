@@ -16,13 +16,13 @@ div
           h2.subtitle-2.mt-2
             | Подписаные предметы
           v-chip-group(column='')
-            v-chip(outlined='' v-for="discipline in disciplines" :key="discipline.id")
+            v-chip(outlined='' v-for="discipline in disciplines" :key="discipline.id" @click="showDisciplineForm" :color="discipline.colorCode")
               | {{discipline.name}}
           v-divider
           h2.subtitle-2.mt-3  Общая информация
           v-row
             v-col
-              p.caption Уплочено за месяц: {{student.balance}} руб.
+              p.caption Уплачено за месяц: {{student.balance}} руб.
             v-col
               p.caption Родитель: {{student.parentFio}}
             v-col
@@ -53,6 +53,9 @@ name: "AStudents",
     ],
   }),
   methods: {
+    showDisciplineForm(){
+        alert("Че смотришь, мем только строится еще")
+    },
     getAllStudents() {
       Api.getAllStudents().then(value => {
             this.students = value.data;
