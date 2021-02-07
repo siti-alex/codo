@@ -10,9 +10,12 @@
                     v-expansion-panel-content
                         v-card(flat='')
                             v-card-title.subtitle-2 Информация
-                                v-card-text.pb-0 Учитель: {{subject.teacher}}
-                                v-card-text.pb-0 Кабинет: №215
-                                v-card-text.pb-0 Стоимость посещения: {{subject.cost}} руб.
+                            v-spacer
+                            v-card-text.pb-0 Учитель:
+                              v-chip-group(column='')
+                                v-chip(v-for="teacher in subject.teacher" label='' outlined='' color='#800024') {{teacher.fio}}
+                            v-card-text.pb-0 Кабинет: №215
+                            v-card-text.pb-0 Стоимость посещения: {{subject.cost}} руб.
                             v-btn(color='primary' fab='' x-small='').float-lg-right
                                 v-icon mdi-pencil
 
