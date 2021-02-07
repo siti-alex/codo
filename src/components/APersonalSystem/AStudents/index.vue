@@ -6,6 +6,8 @@ div
       v-text-field(label='Поиск' prepend-icon='mdi-account-search')
   v-card(:loading='loading').mb-5
     v-subheader.subtitle-1 Школьники
+      v-btn(icon='' color="#8b2639" @click="showNewStudentForm").float-right
+        v-icon mdi-plus
     v-expansion-panels(accordion='' focusable='')
       v-expansion-panel(v-for='student in students' :key='student.id' cols='12' link='' v-if="!loading")
         v-expansion-panel-header(@click="getDisciplinesByUser(student.id)") {{student.fio}}
@@ -30,13 +32,16 @@ div
 
           v-btn(color='primary' fab='' x-small='').float-right
             v-icon mdi-pencil
+  a-new-student-form(ref="aNewStudentForm")
 </template>
 
 <script>
 import Api from "@/service/apiService";
+import ANewStudentForm from "@/components/APersonalSystem/AStudents/ANewStudentForm/index";
 
 export default {
 name: "AStudents",
+  components: {ANewStudentForm},
   data: () => ({
 
     students: [],
@@ -70,6 +75,9 @@ name: "AStudents",
                   console.log('Ошибка');
               });
       },
+    showNewStudentForm() {
+      this.$refs.aNewStudentForm.showDialog();
+    },
   },
   mounted() {
     this.getAllStudents();
