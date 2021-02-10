@@ -13,7 +13,7 @@
                             v-spacer
                             v-card-text.pb-0 Учитель:
                               v-chip-group(column='')
-                                v-chip(v-for="teacher in subject.teacher" label='' outlined='' color='#800024') {{teacher.fio}}
+                                v-chip(v-for="teacher in subject.teacher" :key="teacher.id" label='' outlined='' color='#800024') {{teacher.fio}}
                             v-card-text.pb-0 Кабинет: №215
                             v-card-text.pb-0 Стоимость посещения: {{subject.cost}} руб.
                             v-btn(color='primary' fab='' x-small='').float-lg-right
