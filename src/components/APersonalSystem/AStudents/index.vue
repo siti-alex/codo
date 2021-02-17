@@ -30,18 +30,20 @@ div
             v-col
               p.caption Номер телефона: {{student.phoneNumber}}
 
-          v-btn(color='primary' fab='' x-small='').float-right
+          v-btn(color='primary' fab='' x-small='' @click="showChangeStudentForm").float-right
             v-icon mdi-pencil
   a-new-student-form(ref="aNewStudentForm")
+  a-change-student(ref="aChangeStudentForm")
 </template>
 
 <script>
 import Api from "@/service/apiService";
 import ANewStudentForm from "@/components/APersonalSystem/AStudents/ANewStudentForm/index";
+import AChangeStudent from "./AChangeStudent/index";
 
 export default {
 name: "AStudents",
-  components: {ANewStudentForm},
+  components: {AChangeStudent, ANewStudentForm},
   data: () => ({
 
     students: [],
@@ -69,7 +71,7 @@ name: "AStudents",
           Api.getDisciplinesByUser(id).then(value => {
                   this.disciplines = value.data;
                   console.log(this.disciplines)
-                  console.log(value)
+                  //console.log(value)
               },
               () => {
                   console.log('Ошибка');
@@ -78,6 +80,9 @@ name: "AStudents",
     showNewStudentForm() {
       this.$refs.aNewStudentForm.showDialog();
     },
+    showChangeStudentForm() {
+          this.$refs.aChangeStudentForm.showDialog();
+      },
   },
   mounted() {
     this.getAllStudents();
