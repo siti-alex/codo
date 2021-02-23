@@ -3,7 +3,7 @@ v-dialog(v-model="mutableDialog" max-width="600px")
   v-card.mx-auto(max-width='500')
     v-toolbar(flat='' color='transparent')
       v-app-bar-nav-icon
-      v-toolbar-title Photo Info
+      v-toolbar-title Выбор предметов
       v-spacer
       v-btn(icon='' @click='$refs.search.focus()')
         v-icon mdi-magnify
@@ -32,6 +32,9 @@ v-dialog(v-model="mutableDialog" max-width="600px")
 <script>
     export default {
         name: "AChangeStudent",
+        props: {
+            Student: {},
+        },
         data: () => ({
             mutableDialog: false,
             items: [
@@ -94,6 +97,9 @@ v-dialog(v-model="mutableDialog" max-width="600px")
         },
 
         methods: {
+            test(){
+              console.log(this.Student);
+            },
             next () {
                 this.loading = true
 

@@ -30,10 +30,10 @@ div
             v-col
               p.caption Номер телефона: {{student.phoneNumber}}
 
-          v-btn(color='primary' fab='' x-small='' @click="showChangeStudentForm").float-right
+          v-btn(color='primary' fab='' x-small='' @click="showChangeStudentForm; this.selStudent = student").float-right
             v-icon mdi-pencil
   a-new-student-form(ref="aNewStudentForm")
-  a-change-student(ref="aChangeStudentForm")
+  a-change-student(ref="aChangeStudentForm" :Student="selStudent")
 </template>
 
 <script>
@@ -46,6 +46,7 @@ name: "AStudents",
   components: {AChangeStudent, ANewStudentForm},
   data: () => ({
 
+    selStudent: null,
     students: [],
     disciplines: [],
     loading: false,
