@@ -30,7 +30,7 @@ div
             v-col
               p.caption Номер телефона: {{student.phoneNumber}}
 
-          v-btn(color='primary' fab='' x-small='' @click="showChangeStudentForm; this.selStudent = student").float-right
+          v-btn(color='primary' fab='' x-small='' @click="selStudent = student; showChangeStudentForm()").float-right
             v-icon mdi-pencil
   a-new-student-form(ref="aNewStudentForm")
   a-change-student(ref="aChangeStudentForm" :Student="selStudent")
@@ -82,6 +82,7 @@ name: "AStudents",
       this.$refs.aNewStudentForm.showDialog();
     },
     showChangeStudentForm() {
+        console.log(this.selStudent);
           this.$refs.aChangeStudentForm.showDialog();
       },
   },
