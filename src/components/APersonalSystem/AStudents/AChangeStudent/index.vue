@@ -25,7 +25,7 @@ v-dialog(v-model="mutableDialog")
                 v-icon(left='' v-text='selection.icon')
                 |             {{ selection.name }}
     //v-btn(text="" @click = "showDiscipnines = !showDiscipnines; getAllSubjects()") Редактировать предметы
-    v-btn(text="" @click = "showDisciplines()") Редактировать предметы
+    v-btn(text="" @click = "getAllSubjects()") Редактировать предметы
     div(v-if="showDiscipnines")
       v-toolbar(flat='' color='transparent' )
         v-toolbar-title Выбор предметов
@@ -38,15 +38,15 @@ v-dialog(v-model="mutableDialog")
       //v-divider(v-if='!allSelected')
       v-divider()
       v-list
-        template(v-for='item in categories')
-          v-list-item(v-if='!selected.includes(item)' :key='item.name' :disabled='loading' @click='selected.push(item)')
+        template(v-for='item in subjects')
+          v-list-item(v-if='!selected.includes(item)' :key='item.name' :disabled='Student.disciplines.some(elem => elem.name === item.name)' @click='selected.push(item)')
             v-list-item-avatar
             v-list-item-title(v-text='item.name')
     v-divider
     v-card-actions
       v-spacer
-      v-btn(:disabled='!selected.length' :loading='loading' color='purple' text='' @click='next')
-        | Next
+      v-btn(:disabled='!selected.length' :loading='loading' color='purple' text='' @click='test')
+        | Test
 </template>
 
 <script>
@@ -81,6 +81,31 @@ v-dialog(v-model="mutableDialog")
                     return text.indexOf(search) > -1
                 })
             },
+            est(){
+              const test = [];
+              this.Student.disciplines.forEach(discipline => test.push(discipline.name))
+              //test.some(elem => elem == this.subjects.name)
+              console.log(test.some(elem => { elem === this.subjects.name }))
+              return test.some(elem => { elem === this.subjects.name })
+
+
+            },
+            noAllDicsiplines (){
+              const disciplines = []
+              this.subjects.forEach(element => {
+                  this.Student.disciplines.forEach(discipline => {
+                      if(element.name !== discipline.name) {
+                          disciplines.push(element);
+                      }
+                  })
+                  //if(element.name !== this.Student.disciplines.name) {
+                      //disciplines.push(element);
+                      //console.log(element.name);
+                      //console.log(this.Student.disciplines.name);
+
+              })
+                return disciplines;
+            },
             selections () {
                 const selections = []
 
@@ -99,12 +124,12 @@ v-dialog(v-model="mutableDialog")
         },
 
         methods: {
-            test(){
-              console.log(this.Student);
+            test(item){
+              console.log(this.Student.disciplines.some(elem => { elem.name === item.name }));
             },
             showDisciplines(){
                 this.showDiscipnines = !this.showDiscipnines;
-                this.getAllSubjects();
+                //this.getAllSubjects();
                 this.items = this.subjects;
                 this.selected = this.Student.disciplines;
             },
@@ -112,6 +137,7 @@ v-dialog(v-model="mutableDialog")
                 Api.getAllSubjects().then(value => {
                         this.subjects = value.data;
                         console.log(value.data);
+                        this.showDisciplines();
                     },
                     (error) => {
                         console.log(error);
