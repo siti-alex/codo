@@ -25,8 +25,10 @@ v-dialog(v-model="mutableDialog")
                 v-icon(left='' v-text='selection.icon')
                 |             {{ selection.name }}
     //v-btn(text="" @click = "showDiscipnines = !showDiscipnines; getAllSubjects()") Редактировать предметы
-    v-btn(text="" @click = "getAllSubjects()") Редактировать предметы
+    v-btn(text="" @click = "getAllSubjects()" v-if="!showDiscipnines") Редактировать предметы
+    v-btn(text="" @click = "getAllSubjects()" v-if="showDiscipnines" color='brown lighten-1') Редактировать предметы
     div(v-if="showDiscipnines")
+      v-divider
       v-toolbar(flat='' color='transparent' )
         v-toolbar-title Выбор предметов
       v-container.py-0
