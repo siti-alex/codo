@@ -25,12 +25,15 @@ v-dialog(v-model="mutableDialog")
                 v-icon(left='' v-text='selection.icon')
                 |             {{ selection.name }}
     //v-btn(text="" @click = "showDiscipnines = !showDiscipnines; getAllSubjects()") Редактировать предметы
-    v-btn(text="" @click = "getAllSubjects()" v-if="!showDiscipnines") Редактировать предметы
-    v-btn(text="" @click = "getAllSubjects()" v-if="showDiscipnines" color='brown lighten-1') Редактировать предметы
-    div(v-if="showDiscipnines")
+    v-btn(text="" @click = "getAllSubjects()" v-if="!showDiscipnines").ml-5 Редактировать предметы
+    v-btn(text="" @click = "getAllSubjects()" v-if="showDiscipnines" color='brown lighten-1').ml-5 Редактировать предметы
+    div(v-if="showDiscipnines").ml-5
       v-divider
       v-toolbar(flat='' color='transparent' )
-        v-toolbar-title Выбор предметов
+        v-toolbar-title Подписанные предметы
+        v-spacer
+        code(style="color: #33691E" v-if="calculate <= Student.balance").mt-5 На сумму {{calculate}} рублей
+        code(v-else='').mt-5 На сумму {{calculate}} рублей
       v-container.py-0
         v-row(align='center' justify='start')
           v-col.shrink(v-for='(selection, i) in selections' :key='selection.name')
@@ -69,6 +72,11 @@ v-dialog(v-model="mutableDialog")
         }),
 
         computed: {
+            calculate(){
+                let value = null;
+                this.selected.forEach(element => value += element.cost)
+                return value;
+            },
             allSelected () {
                 return this.selected.length === this.items.length
             },
@@ -145,6 +153,7 @@ v-dialog(v-model="mutableDialog")
                         console.log(error);
                     });
             },
+
             showDialog() {
                 this.mutableDialog = !this.mutableDialog;
             },
