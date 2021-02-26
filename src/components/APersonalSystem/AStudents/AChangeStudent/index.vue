@@ -39,7 +39,7 @@ v-dialog(v-model="mutableDialog")
       v-divider()
       v-list
         template(v-for='item in subjects')
-          v-list-item(v-if='!selected.includes(item)' :key='item.name' :disabled='Student.disciplines.some(elem => elem.name === item.name)' @click='selected.push(item)')
+          v-list-item(:key='item.name' :disabled='Student.disciplines.some(elem => elem.name === item.name)' @click='selected.push(item)')
             v-list-item-avatar
             v-list-item-title(v-text='item.name')
     v-divider
@@ -124,8 +124,8 @@ v-dialog(v-model="mutableDialog")
         },
 
         methods: {
-            test(item){
-              console.log(this.Student.disciplines.some(elem => { elem.name === item.name }));
+            test(){
+              console.log("Анти хайп");
             },
             showDisciplines(){
                 this.showDiscipnines = !this.showDiscipnines;
@@ -142,15 +142,6 @@ v-dialog(v-model="mutableDialog")
                     (error) => {
                         console.log(error);
                     });
-            },
-            next () {
-                this.loading = true
-
-                setTimeout(() => {
-                    this.search = ''
-                    this.selected = []
-                    this.loading = false
-                }, 2000)
             },
             showDialog() {
                 this.mutableDialog = !this.mutableDialog;
