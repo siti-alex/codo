@@ -24,7 +24,7 @@ name: "APersonalSystem",
     links: [
       ['mdi-school', 'Школьники', '/personal/students'],
       ['mdi-book-open', 'Предметы', '/personal/subjects'],
-      ['mdi-account-multiple-outline', 'Учителя'],
+      ['mdi-account-multiple-outline', 'Учителя', '/personal/teachers'],
       ['mdi-newspaper', 'Расписание'],
       ['mdi-notebook-outline', 'Журнал'],
       ['mdi-pencil-box-outline', 'Редактор новостей', '/personal/edit-news'],

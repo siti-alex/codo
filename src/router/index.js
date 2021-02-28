@@ -10,6 +10,7 @@ import Login from '../components/APersonalSystem/ALogin/index.vue'
 import EditNews from '../components/APersonalSystem/ANewsEdit/index.vue'
 import EditEvent from '../components/APersonalSystem/AEventEdit/index.vue'
 import Students from '../components/APersonalSystem/AStudents/index.vue'
+import Teachers from '../components/APersonalSystem/ATeachers/index.vue'
 import Subjects from '../components/APersonalSystem/ASubjects/index.vue'
 import Personal from '../components/APersonalSystem/index.vue'
 import Directions from '../components/AHomePage/ADirectionsPage/index.vue'
@@ -72,6 +73,10 @@ const routes = [
       {
         path: 'students',
         component: Students
+      },
+      {
+        path: 'teachers',
+        component: Teachers
       },
       {
         path: 'subjects',

@@ -18,10 +18,10 @@ v-dialog(v-model="mutableDialog")
       div(v-if="!showDiscipnines")
         v-toolbar(flat='' color='transparent' )
           v-toolbar-title Подписанные предметы
-        v-container.py-0
+        v-container.py-0.ml-0
           v-row(align='center' justify='start')
             v-col.shrink(v-for='(selection, i) in Student.disciplines' :key='selection.name')
-              v-chip(:disabled='loading')
+              v-chip(:disabled='loading' :color="selection.colorCode" outlined='')
                 v-icon(left='' v-text='selection.icon')
                 |             {{ selection.name }}
     //v-btn(text="" @click = "showDiscipnines = !showDiscipnines; getAllSubjects()") Редактировать предметы
@@ -34,12 +34,11 @@ v-dialog(v-model="mutableDialog")
         v-spacer
         code(style="color: #33691E" v-if="calculate <= Student.balance").mt-5 На сумму {{calculate}} рублей
         code(v-else='').mt-5 На сумму {{calculate}} рублей
-      v-container.py-0
-        v-row(align='center' justify='start')
+      v-container.py-0.ml-0
+        v-row(justify='start')
           v-col.shrink(v-for='(selection, i) in selections' :key='selection.name')
-            v-chip(:disabled='loading' close='' @click:close='selected.splice(i, 1)')
-              v-icon(left='' v-text='selection.icon')
-              |             {{ selection.name }}
+            v-chip(:disabled='loading' close='' @click:close='selected.splice(i, 1)' outlined='' :color="selection.colorCode")
+              |{{ selection.name }}
       //v-divider(v-if='!allSelected')
       v-divider()
       v-list
