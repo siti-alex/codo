@@ -11,12 +11,11 @@
       v-expansion-panels(accordion='' focusable='')
         v-expansion-panel(v-for='teacher in teachers' :key='teacher.id' cols='12' link='' v-if="!loading")
           v-expansion-panel-header() {{teacher.fio}}
-            template(v-slot:actions='')
           v-expansion-panel-content
             h2.subtitle-2.mt-2
               | Преподает предметы
-            //v-chip-group(column='')
-              v-chip(outlined='' v-for="discipline in disciplines" :key="discipline.id" @click="showDisciplineForm" :color="discipline.colorCode")
+            v-chip-group(column='')
+              v-chip(outlined='' v-for="discipline in teacher.disciplines" :key="discipline.id" @click="showDisciplineForm" :color="discipline.colorCode")
                 | {{discipline.name}}
             v-divider
             h2.subtitle-2.mt-3  Общая информация

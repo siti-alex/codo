@@ -11,8 +11,6 @@
             v-col(cols='12')
               v-text-field(label="Стоимость посещения" v-model="newDiscipline.cost")
             v-col(cols='12')
-              v-text-field(label="Номер кабинета")
-            v-col(cols='12')
               v-text-field(label="Учитель")
 
 
@@ -29,13 +27,6 @@
         name: "ANewSubjectForm",
         data: () => ({
             mutableDialog: false,
-            // teacher:
-            //     {
-            //         fio: "Андрей, пока я не получаю учителей, невозможно нормально создать предмет",
-            //         login: "А это поле вообще ненадо мне получать в предметах",
-            //         privilege: 0,
-            //         sex: true,
-            //     },
             newDiscipline: {
                 teacher: 1,
                 colorCode: null,
@@ -55,8 +46,9 @@
                 //formdata.append("teacher", JSON.stringify(this.newDiscipline.teacher));
                 formdata.append("teacherIDs", this.newDiscipline.teacher);
                 // this.updRenter.room.renter = {id: this.renterSrc.id};
-                Api.AddNewDiscipline(formdata).then((result) => {
-                  console.log(result);
+                Api.AddNewDiscipline(formdata).then(() => {
+                  this.$emit('update');
+                  this.showDialog();
                 });
 
             },

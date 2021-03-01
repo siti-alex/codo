@@ -2,8 +2,8 @@ import axios from 'axios';
 //import router from '@/router';
 
 
-const api = 'http://213.87.96.9:6006';
-//const api = 'http://192.168.202.104:8080';
+//const api = 'http://213.87.96.9:6006';
+const api = 'http://192.168.202.104:8080';
 
 
 const baseURL = `${api}`;
@@ -85,7 +85,10 @@ export default {
     },
     AddNewDiscipline(discipline){
         return API.post(`/discipline/add`, discipline);
-    }
+    },
+    deleteDiscipline(id){
+        return API.get(`discipline/${id}/delete`)
+    },
 
 //http://адрес:порт/news/{id}/delete
     //return API.get(`/news/delete?id=${id}`);

@@ -16,20 +16,23 @@
                                 v-chip(v-for="teacher in subject.teacher" :key="teacher.id" label='' outlined='' color='#800024') {{teacher.fio}}
                             v-card-text.pb-0 Кабинет: №215
                             v-card-text.pb-0 Стоимость посещения: {{subject.cost}} руб.
-                            v-btn(color='primary' fab='' x-small='').float-lg-right
+                            v-btn(color='primary' fab='' x-small='' @click="showChangeSubjectForm(); selDiscipline = subject").float-lg-right
                                 v-icon mdi-pencil
 
-        ANewSubjectForm(ref="aNewSubjectForm" )
+        ANewSubjectForm(ref="aNewSubjectForm" @update="getAllSubjects")
+        a-change-subject(ref="aChangeSubject" @update="getAllSubjects" :Discipline="selDiscipline")
 </template>
 
 <script>
     import Api from "@/service/apiService";
     import ANewSubjectForm from "./ANewSubjectForm/index";
+    import AChangeSubject from "./AChangeSubject/index";
     export default {
         name: "ASubjects",
-        components: {ANewSubjectForm},
+        components: {AChangeSubject, ANewSubjectForm},
         data () {
             return {
+                selDiscipline: [],
                 subjects: [],
                 loading: false,
             }
@@ -49,6 +52,9 @@
             },
             showNewSubjectForm() {
                 this.$refs.aNewSubjectForm.showDialog();
+            },
+            showChangeSubjectForm() {
+                this.$refs.aChangeSubject.showDialog();
             },
         },
         mounted() {

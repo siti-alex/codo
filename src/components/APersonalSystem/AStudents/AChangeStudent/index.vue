@@ -1,7 +1,7 @@
 <template lang="pug">
-v-dialog(v-model="mutableDialog")
+v-dialog(v-model="mutableDialog" persistent='' max-width='800' @keydown.esc="showDialog")
 
-  v-card.mx-auto()
+  v-card()
     v-card-title
       span.headline Редактировать информацию
     v-card-text
@@ -49,8 +49,8 @@ v-dialog(v-model="mutableDialog")
     v-divider
     v-card-actions
       v-spacer
-      v-btn(:disabled='!selected.length' :loading='loading' color='purple' text='' @click='test')
-        | Test
+      v-btn(color='purple' text='' @click='showDialog') Отмена
+      v-btn(color='purple' text='' @click='test') Test
 </template>
 
 <script>
@@ -76,45 +76,7 @@ v-dialog(v-model="mutableDialog")
                 this.selected.forEach(element => value += element.cost)
                 return value;
             },
-            allSelected () {
-                return this.selected.length === this.items.length
-            },
-            categories () {
-                const search = this.search.toLowerCase()
 
-                if (!search) return this.items
-
-                return this.items.filter(item => {
-                    const text = item.name.toLowerCase()
-
-                    return text.indexOf(search) > -1
-                })
-            },
-            est(){
-              const test = [];
-              this.Student.disciplines.forEach(discipline => test.push(discipline.name))
-              //test.some(elem => elem == this.subjects.name)
-              console.log(test.some(elem => { elem === this.subjects.name }))
-              return test.some(elem => { elem === this.subjects.name })
-
-
-            },
-            noAllDicsiplines (){
-              const disciplines = []
-              this.subjects.forEach(element => {
-                  this.Student.disciplines.forEach(discipline => {
-                      if(element.name !== discipline.name) {
-                          disciplines.push(element);
-                      }
-                  })
-                  //if(element.name !== this.Student.disciplines.name) {
-                      //disciplines.push(element);
-                      //console.log(element.name);
-                      //console.log(this.Student.disciplines.name);
-
-              })
-                return disciplines;
-            },
             selections () {
                 const selections = []
 
