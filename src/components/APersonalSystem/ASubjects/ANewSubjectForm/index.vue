@@ -18,7 +18,7 @@
       v-card-actions
         v-spacer
         v-btn(color='blue darken-1', text='' @click="AddNewDiscipline()") Сохранить
-        v-btn(color='blue darken-1', text='' @click="showDialog") Отмена
+        v-btn(color='blue darken-1', text='' @click="showDialog()") Отмена
 </template>
 
 <script>
@@ -37,6 +37,10 @@
         methods: {
             showDialog() {
                 this.mutableDialog = !this.mutableDialog;
+                this.newDiscipline.teacher = 1;
+                this.newDiscipline.colorCode = null;
+                this.newDiscipline.cost = null;
+                this.newDiscipline.name = null;
             },
             AddNewDiscipline(){
                 let formdata = new FormData();

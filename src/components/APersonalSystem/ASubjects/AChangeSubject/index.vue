@@ -16,7 +16,7 @@
 
       v-card-actions
         v-spacer
-        v-btn(color='blue darken-1', text='' @click="dialog = true").col-2 Удалить
+        v-btn(color='blue darken-1', text='' @click="dialog = true") Удалить
         v-btn(color='blue darken-1', text='' @click="AddNewDiscipline()") Сохранить
         v-btn(color='blue darken-1', text='' @click="showDialog") Отмена
 
