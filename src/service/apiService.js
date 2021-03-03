@@ -18,7 +18,7 @@ const API = axios.create({
         "Accept": "application/json",
         "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS",
         "Access-Control-Allow-Headers": "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With",
-        'Content-Type': 'multipart/form-data',
+        'Content-Type': 'application/json',
         "Set-Cookie": "SameSite=None;"
         //"Set-Cookie": "cross-site-cookie=name; SameSite=None; Secure"
     }
@@ -89,6 +89,12 @@ export default {
     deleteDiscipline(id){
         return API.get(`discipline/${id}/delete`)
     },
+    deleteStudent(id){
+        return API.get(`student/${id}/delete`)
+    },
+    updateStudent(upd,id){
+        return API.post(`student/${id}/update`,upd)
+    }
 
 //http://адрес:порт/news/{id}/delete
     //return API.get(`/news/delete?id=${id}`);

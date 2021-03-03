@@ -50,7 +50,7 @@ v-dialog(v-model="mutableDialog" persistent='' max-width='800' @keydown.esc="sho
     v-card-actions
       v-spacer
       v-btn(color='purple' text='' @click='showDialog') Отмена
-      v-btn(color='purple' text='' @click='test') Test
+      v-btn(color='purple' text='' @click='updateStudent') Test
 </template>
 
 <script>
@@ -68,6 +68,19 @@ v-dialog(v-model="mutableDialog" persistent='' max-width='800' @keydown.esc="sho
             loading: false,
             search: '',
             selected: [],
+
+            // updStudent: {
+            //     login: null,
+            //     password: 'test',
+            //     fio: null,
+            //     sex: null,
+            //     balance: null,
+            //     course: null,
+            //     parenFio: null,
+            //     phoneNumber: null,
+            //     disciplines: null,
+            //     debtor: null
+            // },
         }),
 
         computed: {
@@ -96,7 +109,7 @@ v-dialog(v-model="mutableDialog" persistent='' max-width='800' @keydown.esc="sho
 
         methods: {
             test(){
-              console.log("Анти хайп");
+              console.log();
             },
             showDisciplines(){
                 this.showDiscipnines = !this.showDiscipnines;
@@ -113,6 +126,24 @@ v-dialog(v-model="mutableDialog" persistent='' max-width='800' @keydown.esc="sho
                     (error) => {
                         console.log(error);
                     });
+            },
+            updateStudent(){
+                let updStudent = {};
+                updStudent.login = this.Student.login;
+                updStudent.password = '123';
+                updStudent.fio = this.Student.fio;
+                updStudent.sex = this.Student.sex;
+                updStudent.balance = this.Student.balance;
+                updStudent.course = this.Student.course;
+                updStudent.parenFio = this.Student.parentFio;
+                updStudent.phoneNumber = this.Student.phoneNumber;
+                updStudent.disciplines = this.selected;
+                updStudent.debtor = false;
+                console.log(updStudent);
+              Api.updateStudent(updStudent,this.Student.id).then(value => {
+                  console.log(value);
+
+                  })
             },
 
             showDialog() {
