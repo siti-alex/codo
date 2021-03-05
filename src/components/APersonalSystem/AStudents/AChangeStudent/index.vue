@@ -48,9 +48,25 @@ v-dialog(v-model="mutableDialog" persistent='' max-width='800' @keydown.esc="sho
             v-list-item-title(v-text='item.name')
     v-divider
     v-card-actions
+      v-btn(color='red' text='' @click='dialog = true').ml-3 Удалить
       v-spacer
       v-btn(color='purple' text='' @click='showDialog') Отмена
-      v-btn(color='purple' text='' @click='updateStudent') Test
+      v-btn(color='purple' text='' @click='updateStudent') Сохранить
+
+    v-row(justify='center')
+      v-dialog(v-model='dialog' persistent='' max-width='40%')
+        template(v-slot:activator='{ on, attrs }')
+        v-card
+          v-card-title.headline
+            | Предмет будет удален
+          v-card-text
+            | Вы уверены?
+          v-card-actions
+            v-spacer
+            v-btn(color='primary' text='' @click='dialog = false')
+              | Отмена
+            v-btn(color="red darken-4" text='' @click='deleteStudent(); dialog = false')
+              | Удалить
 </template>
 
 <script>
@@ -68,6 +84,7 @@ v-dialog(v-model="mutableDialog" persistent='' max-width='800' @keydown.esc="sho
             loading: false,
             search: '',
             selected: [],
+            dialog: false,
 
             // updStudent: {
             //     login: null,
@@ -111,6 +128,16 @@ v-dialog(v-model="mutableDialog" persistent='' max-width='800' @keydown.esc="sho
             test(){
               console.log();
             },
+            deleteStudent(){
+                Api.deleteStudent(this.Student.id).then(() => {
+                        this.$emit('update');
+                        this.showDialog();
+                    },
+                    () => {
+                        console.log('Ошибка');
+                    });
+
+            },
             showDisciplines(){
                 this.showDiscipnines = !this.showDiscipnines;
                 //this.getAllSubjects();
@@ -142,7 +169,7 @@ v-dialog(v-model="mutableDialog" persistent='' max-width='800' @keydown.esc="sho
                 console.log(updStudent);
               Api.updateStudent(updStudent,this.Student.id).then(value => {
                   console.log(value);
-
+                  this.$emit('update');
                   })
             },
 
