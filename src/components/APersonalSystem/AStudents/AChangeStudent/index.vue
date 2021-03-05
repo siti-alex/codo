@@ -170,6 +170,7 @@ v-dialog(v-model="mutableDialog" persistent='' max-width='800' @keydown.esc="sho
               Api.updateStudent(updStudent,this.Student.id).then(value => {
                   console.log(value);
                   this.$emit('update');
+                  this.showDialog();
                   })
             },
 

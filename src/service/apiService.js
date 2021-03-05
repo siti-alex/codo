@@ -94,6 +94,9 @@ export default {
     },
     updateStudent(upd,id){
         return API.post(`student/${id}/update`,upd)
+    },
+    addStudent(student){
+      return API.post(`/student/addStudent`, student)
     }
 
 //http://адрес:порт/news/{id}/delete

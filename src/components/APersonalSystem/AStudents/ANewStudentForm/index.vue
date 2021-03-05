@@ -7,23 +7,28 @@
         v-container
           v-row
             v-col(cols='12')
-              v-text-field(label='ФИО')
+              v-text-field(label='ФИО' v-model="newStudent.fio")
             v-col(cols='12')
-              v-text-field(label="ФИО родителя")
+              v-text-field(label="ФИО родителя" v-model="newStudent.parentFio")
             v-col(cols='12')
-              v-text-field(label="Номер телефона родителя")
-            v-col(cols='12')
-              v-text-field(label="Уплачено за месяц")
+              v-text-field(label="Номер телефона родителя" v-model="newStudent.phoneNumber")
             v-col(cols='5')
-              v-text-field(label="Логин" v-model="newStudent.login" @click:append-outer="test")
-            v-col(cols='6')
+              v-radio-group(v-model="newStudent.sex" label="Пол")
+                v-radio(value=true label="Мужской").mt-2
+                v-radio(value=false label="Женский")
+            v-col(cols='7')
+              v-text-field(label="Курс" v-model="newStudent.course")
+              v-text-field(label="Уплачено за месяц" v-model="newStudent.balance")
+            v-col(cols='5')
+              v-text-field(label="Логин" v-model="newStudent.login" @click:append-outer="test" )
+            v-col(cols='7')
               v-text-field(label="Пароль" v-model="newStudent.password" id='pass' @click="copy" append-outer-icon='mdi-brain' @click:append-outer="generatePassword")
 
 
 
       v-card-actions
         v-spacer
-        v-btn(color='blue darken-1', text='' @click="showDialog") Сохранить
+        v-btn(color='blue darken-1', text='' @click="addStudent()") Сохранить
         v-btn(color='blue darken-1', text='' @click="showDialog") Отмена
     .text-center.ma-2
       v-snackbar(v-model='snackbar' timeout='3000')
@@ -34,13 +39,22 @@
 </template>
 
 <script>
+import Api from "@/service/apiService";
 export default {
 name: "ANewStudentForm",
   data: () => ({
     mutableDialog: false,
     newStudent: {
       login: null,
-      password: null
+      password: null,
+      fio: null,
+      balance: null,
+      course: null,
+      debtor: false,
+      parentFio: null,
+      phoneNumber: null,
+      privilege: 0,
+      sex: false,
     },
     snackbar: false,
     snackbarText: `Пароль скопирован`,
@@ -51,6 +65,13 @@ name: "ANewStudentForm",
     },
     test(){
       console.log("Хеллов");
+    },
+    addStudent(){
+        Api.addStudent(this.newStudent).then(value => {
+            console.log(value);
+            this.$emit('update');
+            this.showDialog();
+        })
     },
     copy(){
       if(this.newStudent.password) {

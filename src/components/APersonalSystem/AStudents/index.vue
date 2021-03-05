@@ -32,7 +32,7 @@ div
 
           v-btn(color='primary' fab='' x-small='' @click="selStudent = student; selStudent.disciplines = disciplines; showChangeStudentForm()").float-right
             v-icon mdi-pencil
-  a-new-student-form(ref="aNewStudentForm")
+  a-new-student-form(ref="aNewStudentForm" @update="getAllStudents()")
   a-change-student(ref="aChangeStudentForm" :Student="selStudent" @update="getAllStudents()")
 </template>
 
