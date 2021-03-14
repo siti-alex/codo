@@ -15,23 +15,28 @@ div
             v-icon(color='error')
               | mdi-alert-circle
         v-expansion-panel-content
-          h2.subtitle-2.mt-2
-            | Подписаные предметы
-          v-chip-group(column='')
-            v-chip(outlined='' v-for="discipline in disciplines" :key="discipline.id" @click="showDisciplineForm" :color="discipline.colorCode")
-              | {{discipline.name}}
-          v-divider
-          h2.subtitle-2.mt-3  Общая информация
-          v-row
-            v-col
-              p.caption Уплачено за месяц: {{student.balance}} руб.
-            v-col
-              p.caption Родитель: {{student.parentFio}}
-            v-col
-              p.caption Номер телефона: {{student.phoneNumber}}
+          div(v-if="loadingStudent")
+            v-subheader
+              | Загрузка данных
+            v-progress-linear(indeterminate='' rounded='')
+          div(v-if="!loadingStudent")
+            h2.subtitle-2.mt-2
+              | Подписаные предметы
+            v-chip-group(column='')
+              v-chip(outlined='' v-for="discipline in disciplines" :key="discipline.id" @click="showDisciplineForm" :color="discipline.colorCode")
+                | {{discipline.name}}
+            v-divider
+            h2.subtitle-2.mt-3  Общая информация
+            v-row
+              v-col
+                p.caption Уплачено за месяц: {{student.balance}} руб.
+              v-col
+                p.caption Родитель: {{student.parentFio}}
+              v-col
+                p.caption Номер телефона: {{student.phoneNumber}}
 
-          v-btn(color='primary' fab='' x-small='' @click="selStudent = student; selStudent.disciplines = disciplines; showChangeStudentForm()").float-right
-            v-icon mdi-pencil
+            v-btn(color='primary' fab='' x-small='' @click="selStudent = student; selStudent.disciplines = disciplines; showChangeStudentForm()").float-right
+              v-icon mdi-pencil
   a-new-student-form(ref="aNewStudentForm" @update="getAllStudents()")
   a-change-student(ref="aChangeStudentForm" :Student="selStudent" @update="getAllStudents()")
 </template>
@@ -51,7 +56,12 @@ name: "AStudents",
     disciplines: [],
     loading: false,
 
+    loadingStudent: false,
   }),
+
+  /*
+  Помнить, что через v-model в exp-panels можно контролить opens и их очищать соответственно
+   */
   methods: {
     showDisciplineForm(){
         alert("Че смотришь, мем только строится еще")
@@ -69,13 +79,17 @@ name: "AStudents",
           });
     },
       getDisciplinesByUser(id) {
+          this.loadingStudent = true;
           Api.getDisciplinesByUser(id).then(value => {
                   this.disciplines = value.data;
                   console.log(this.disciplines)
+                  setTimeout(() => (this.loadingStudent = false), 1000)
+
                   //console.log(value)
               },
               () => {
                   console.log('Ошибка');
+                  this.loadingStudent = false;
               });
       },
     showNewStudentForm() {
