@@ -8,9 +8,10 @@ div
     v-subheader.subtitle-1 Школьники
       v-btn(icon='' color="#8b2639" @click="showNewStudentForm").float-right
         v-icon mdi-plus
-    v-expansion-panels(accordion='' focusable='')
+    v-expansion-panels(accordion='' focusable='' v-model="panel")
       v-expansion-panel(v-for='student in students' :key='student.id' cols='12' link='' v-if="!loading")
         v-expansion-panel-header(@click="getDisciplinesByUser(student.id)") {{student.fio}}
+        //v-expansion-panel-header() {{student.fio}}
           template(v-if="student.id%2==0" v-slot:actions='')
             v-icon(color='error')
               | mdi-alert-circle
@@ -39,10 +40,6 @@ div
               v-icon mdi-pencil
   a-new-student-form(ref="aNewStudentForm" @update="getAllStudents()")
   a-change-student(ref="aChangeStudentForm" :Student="selStudent" @update="getAllStudents()")
-
-  v-fab-transition(v-if="bottom")
-    v-btn(vcolor='pink' dark='' fixed='' bottom='' left='' fab='' color="#37474F" style="opacity: 0.8")
-      v-icon mdi-arrow-up
 </template>
 
 <script>
@@ -61,7 +58,8 @@ name: "AStudents",
     disciplines: [],
     loading: false,
 
-    slicer: 30,
+    slicer: 20,
+    panel: true,
 
     loadingStudent: false,
   }),
@@ -87,17 +85,21 @@ name: "AStudents",
           });
     },
       getDisciplinesByUser(id) {
-          this.loadingStudent = true;
+          //this.loadingStudent = true;
           Api.getDisciplinesByUser(id).then(value => {
                   this.disciplines = value.data;
                   console.log(this.disciplines)
-                  setTimeout(() => (this.loadingStudent = false), 1000)
-
+                  // if(this.students.length > 80){
+                  //     setTimeout(() => (this.loadingStudent = false), 1000)
+                  // }
+                  // else {
+                  //     this.loadingStudent = false
+                  // }
                   //console.log(value)
               },
               () => {
                   console.log('Ошибка');
-                  this.loadingStudent = false;
+                  //this.loadingStudent = false;
               });
       },
     showNewStudentForm() {
@@ -126,7 +128,14 @@ name: "AStudents",
                 }
 
             }
-        }
+        },
+        // panel: {
+        //     handler (){
+        //         if(this.panel !== undefined){
+        //             this.getDisciplinesByUser(this.panel+1)
+        //         }
+        //     }
+        // }
     }
 }
 </script>
