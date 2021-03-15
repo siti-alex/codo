@@ -39,6 +39,10 @@ div
               v-icon mdi-pencil
   a-new-student-form(ref="aNewStudentForm" @update="getAllStudents()")
   a-change-student(ref="aChangeStudentForm" :Student="selStudent" @update="getAllStudents()")
+
+  v-fab-transition(v-if="bottom")
+    v-btn(vcolor='pink' dark='' fixed='' bottom='' left='' fab='' color="#37474F" style="opacity: 0.8")
+      v-icon mdi-arrow-up
 </template>
 
 <script>
@@ -50,11 +54,14 @@ export default {
 name: "AStudents",
   components: {AChangeStudent, ANewStudentForm},
   data: () => ({
-
+    bottom: false,
     selStudent: null,
     students: [],
+    allStudents: [],
     disciplines: [],
     loading: false,
+
+    slicer: 30,
 
     loadingStudent: false,
   }),
@@ -69,7 +76,8 @@ name: "AStudents",
     getAllStudents() {
       this.loading = true;
       Api.getAllStudents().then(value => {
-            this.students = value.data;
+            this.allStudents = value.data;
+            this.students = this.allStudents.slice(0,this.slicer);
             console.log(this.students)
             this.loading = false;
           },
@@ -99,10 +107,27 @@ name: "AStudents",
         console.log(this.selStudent);
           this.$refs.aChangeStudentForm.showDialog();
       },
+      scrollFunction(){
+          //this.bottom = document.body.scrollTop > 100 || document.documentElement.scrollTop > 100;
+          this.bottom = document.documentElement.getBoundingClientRect().bottom < document.documentElement.clientHeight + 200;
+
+      },
   },
   mounted() {
+    window.onscroll = () => {this.scrollFunction()};
     this.getAllStudents();
-  }
+  },
+    watch: {
+        bottom: {
+            handler () {
+                if(this.bottom){
+                    this.slicer += 10;
+                    this.students = this.allStudents.slice(0,this.slicer);
+                }
+
+            }
+        }
+    }
 }
 </script>
 
