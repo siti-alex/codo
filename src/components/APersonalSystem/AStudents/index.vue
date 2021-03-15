@@ -10,7 +10,8 @@ div
         v-icon mdi-plus
     v-expansion-panels(accordion='' focusable='' v-model="panel")
       v-expansion-panel(v-for='student in students' :key='student.id' cols='12' link='' v-if="!loading")
-        v-expansion-panel-header(@click="getDisciplinesByUser(student.id)") {{student.fio}}
+        //v-expansion-panel-header(@click="getDisciplinesByUser(student.id)") {{student.fio}}
+        v-expansion-panel-header() {{student.fio}}
           template(v-if="student.id%2==0" v-slot:actions='')
             v-icon(color='error')
               | mdi-alert-circle
@@ -22,7 +23,8 @@ div
           div(v-if="!loadingStudent")
             h2.subtitle-2.mt-2
               | Подписаные предметы
-            v-chip-group(column='')
+            v-chip-group(column='' style="height: 50px;")
+              v-progress-circular(indeterminate='' color='primary' v-if="!disciplines")
               v-chip(outlined='' v-for="discipline in disciplines" :key="discipline.id" @click="showDisciplineForm" :color="discipline.colorCode")
                 | {{discipline.name}}
             v-divider
@@ -54,7 +56,7 @@ name: "AStudents",
     selStudent: null,
     students: [],
     allStudents: [],
-    disciplines: [],
+    disciplines: null,
     loading: false,
 
     slicer: 20,
@@ -85,6 +87,7 @@ name: "AStudents",
     },
       getDisciplinesByUser(id) {
           //this.loadingStudent = true;
+          this.disciplines = null;
           Api.getDisciplinesByUser(id).then(value => {
                   this.disciplines = value.data;
                   console.log(this.disciplines)
@@ -128,13 +131,13 @@ name: "AStudents",
 
             }
         },
-        // panel: {
-        //     handler (){
-        //         if(this.panel !== undefined){
-        //             this.getDisciplinesByUser(this.panel+1)
-        //         }
-        //     }
-        // }
+        panel: {
+            handler (){
+                if(this.panel !== undefined){
+                    this.getDisciplinesByUser(this.panel+1)
+                }
+            }
+        }
     }
 }
 </script>
