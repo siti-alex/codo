@@ -11,7 +11,6 @@ div
     v-expansion-panels(accordion='' focusable='' v-model="panel")
       v-expansion-panel(v-for='student in students' :key='student.id' cols='12' link='' v-if="!loading")
         v-expansion-panel-header(@click="getDisciplinesByUser(student.id)") {{student.fio}}
-        //v-expansion-panel-header() {{student.fio}}
           template(v-if="student.id%2==0" v-slot:actions='')
             v-icon(color='error')
               | mdi-alert-circle
