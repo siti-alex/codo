@@ -11,8 +11,8 @@ div
     v-expansion-panels(accordion='' focusable='' v-model="panel")
       v-expansion-panel(v-for='student in students' :key='student.id' cols='12' link='' v-if="!loading")
         //v-expansion-panel-header(@click="getDisciplinesByUser(student.id)") {{student.fio}}
-        v-expansion-panel-header() {{student.fio}}
-          template(v-if="student.id%2==0" v-slot:actions='')
+        v-expansion-panel-header(@click="selStudent = student") {{student.fio}}
+          template(v-if="student.debtor" v-slot:actions='')
             v-icon(color='error')
               | mdi-alert-circle
         v-expansion-panel-content
@@ -77,7 +77,7 @@ name: "AStudents",
       Api.getAllStudents().then(value => {
             this.allStudents = value.data;
             this.students = this.allStudents.slice(0,this.slicer);
-            console.log(this.students)
+            console.log(this.allStudents)
             this.loading = false;
           },
           (error) => {
@@ -134,7 +134,7 @@ name: "AStudents",
         panel: {
             handler (){
                 if(this.panel !== undefined){
-                    this.getDisciplinesByUser(this.panel+1)
+                    this.getDisciplinesByUser(this.selStudent.id)
                 }
             }
         }
