@@ -167,12 +167,26 @@ export default {
   },
   methods: {
     showImage(){
-      this.$refs.aInsertImage.showDialog();
+      //this.$refs.aInsertImage.showDialog();
+        new Promise((resolve) => {
+            this.selectedNode = document.getSelection().focusNode;
+            if (this.selectedNode.data === undefined) {
+                this.exec('insertHTML', true, '<div>&#160;</div>');
+                this.selectedNode = document.getSelection().focusNode;
+            }
+            resolve();
+        }).then(() => {
+            let offset = document.getSelection().focusOffset;
+            this.selectedNode.data = this.selectedNode.data.substr(0, offset) + "†" + this.selectedNode.data.substr(offset, this.selectedNode.data.length);
+            this.$refs.aInsertImage.showDialog();
+        })
     },
     insertImage(file){
         //console.log(file);
-      this.exec('insertHTML', false, file);
-      this.exec('insertHTML', false, '<div></div>');
+      // this.exec('insertHTML', false, file);
+      // this.exec('insertHTML', false, '<div></div>');
+        this.selectedNode.parentNode.outerHTML = this.selectedNode.parentNode.outerHTML.replace('†', file)
+        this.getValue();
     },
     /* -------------------------------------------- */
     bold () {

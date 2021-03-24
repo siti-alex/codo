@@ -16,6 +16,7 @@
                                 v-chip(v-for="teacher in subject.teacher" :key="teacher.id" label='' outlined='' color='#800024') {{teacher.fio}}
                             v-card-text.pb-0 Кабинет: №215
                             v-card-text.pb-0 Стоимость посещения: {{subject.cost}} руб.
+                            v-chip(:color="subject.colorCode")
                             v-btn(color='primary' fab='' x-small='' @click="showChangeSubjectForm(); selDiscipline = subject").float-lg-right
                                 v-icon mdi-pencil
 
