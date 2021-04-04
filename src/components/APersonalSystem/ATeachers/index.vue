@@ -3,7 +3,7 @@
     v-row
       v-col
       v-col
-        v-text-field(label='Поиск' prepend-icon='mdi-account-search')
+        v-text-field(label='Поиск' prepend-icon='mdi-account-search' @input='search')
     v-card(:loading='loading').mb-5
       v-subheader.subtitle-1 Учителя
         v-btn(icon='' color="#8b2639" @click="showNewTeacherForm").float-right
@@ -39,15 +39,26 @@ export default {
   components: {AChangeTeacher, ANewTeacher},
   data: () => ({
 
+    bottom: false,
     selTeacher: null,
     teachers: [],
+    allTeachers: [],
     disciplines: [],
     loading: false,
+    slicer: 20,
 
   }),
   methods: {
-    showDisciplineForm(){
+    showDisciplineForm() {
       alert("Че смотришь, мем только строится еще")
+    },
+    search(search){
+      this.teachers = this.allTeachers.filter(
+          teacher => teacher.fio.toLowerCase().match(`^${search.toLowerCase()}.`)
+      );
+      if(!search) {
+        this.teachers = this.allTeachers.slice(0,this.slicer);
+      }
     },
     showNewTeacherForm() {
       this.$refs.aNewTeacher.showDialog();
@@ -58,7 +69,8 @@ export default {
     getAllTeacher() {
       this.loading = true;
       Api.getAllTeachers().then(value => {
-            this.teachers = value.data;
+            this.allTeachers = value.data;
+            this.teachers = this.allTeachers.slice(0, this.slicer);
             console.log(this.teachers)
             this.loading = false;
           },
@@ -67,11 +79,28 @@ export default {
             this.loading = false;
           });
     },
+    scrollFunction() {
+      //this.bottom = document.body.scrollTop > 100 || document.documentElement.scrollTop > 100;
+      this.bottom = document.documentElement.getBoundingClientRect().bottom < document.documentElement.clientHeight + 200;
+    },
 
 
   },
   mounted() {
+    window.onscroll = () => {
+      this.scrollFunction()
+    };
     this.getAllTeacher();
+  },
+  watch: {
+    bottom: {
+      handler() {
+        if (this.bottom) {
+          this.slicer += 10;
+          this.teachers = this.allTeachers.slice(0, this.slicer);
+        }
+      }
+    },
   }
 }
 </script>
