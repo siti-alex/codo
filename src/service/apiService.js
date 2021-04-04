@@ -60,16 +60,16 @@ export default {
         return API.get(`/news/${id}/delete`);
     },
     getAllNews(){
-        return API.get(`/news/getAll`);
+        return API.get(`/news/public/getAll`);
     },
     setNews(news){
         return API.post(`/news/upload`, news);
     },
     getNewsById(id){
-        return API.get(`/news/${id}`);
+        return API.get(`/news/public/${id}`);
     },
     getEventById(id){
-        return API.get(`/event/${id}`);
+        return API.get(`/event/public/${id}`);
     },
     ChangeNews(news, id){
         return API.post(`/news/${id}/update`, news);
@@ -78,7 +78,7 @@ export default {
         return API.post(`/image/upload`, img);
     },
     getEvents(){
-        return API.get(`/event/getActual`);
+        return API.get(`/event/public/getActual`);
     },
     uploadEvent(event){
         return API.post(`/event/upload`, event);

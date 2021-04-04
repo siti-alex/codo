@@ -6,7 +6,7 @@ div
     v-row
       v-col(v-for='newses in news' :key='newses.id' cols='4')
         v-card(tile='' height='100%' hover='' @click="" :to="{name: 'NewsId', params: { id: newses.id}}").mx-5.custom
-          v-img.white--text.align-end(height='200px' :src='serverIp+`/image/`+newses.image.id')
+          v-img.white--text.align-end(height='200px' :src='serverIp+`/image/public/`+newses.image.id')
             v-card-title(style="background-color: #180000; opacity: 0.8; padding: 7px;") {{newses.head}}
           v-card-subtitle.pb-0
             | {{newses.date}}

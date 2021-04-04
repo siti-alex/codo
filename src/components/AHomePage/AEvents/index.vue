@@ -25,7 +25,7 @@ div
       v-col(cols='6')
         v-card
           v-card(tile='' v-if="cardEvent" @click="" :to="{name: 'EventId', params: { id: cardEvent.id}}")
-            v-img.white--text.align-end(height='200px' v-if="cardEvent.image" :src='serverIp+`/image/`+cardEvent.image.id')
+            v-img.white--text.align-end(height='200px' v-if="cardEvent.image" :src='serverIp+`/image/public/`+cardEvent.image.id')
               v-card-title(style="background-color:#000000; opacity: 0.8; height: 50px").pa-2
                 p.ml-3 {{cardEvent.head}}
             v-card-subtitle.pb-0
