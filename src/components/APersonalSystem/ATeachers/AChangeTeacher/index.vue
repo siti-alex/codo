@@ -16,7 +16,7 @@
             v-toolbar-title Ведет предметы
           v-container.py-0.ml-0
             v-row(align='center' justify='start')
-              v-col.shrink(v-for='(selection, i) in Student.disciplines' :key='selection.name')
+              v-col.shrink(v-for='(selection, i) in Teacher.disciplines' :key='selection.name')
                 v-chip(:disabled='loading' :color="selection.colorCode" outlined='')
                   v-icon(left='' v-text='selection.icon')
                   |             {{ selection.name }}
@@ -117,7 +117,7 @@ export default {
       this.showDiscipnines = !this.showDiscipnines;
       //this.getAllSubjects();
       this.items = this.subjects;
-      this.selected = this.Student.disciplines;
+      this.selected = this.Teacher.disciplines;
     },
     getAllSubjects(){
       Api.getAllSubjects().then(value => {
@@ -133,9 +133,9 @@ export default {
       let updTeacher = {};
       updTeacher.login = this.Teacher.login;
       updTeacher.password = '123';
-      updTeacher.fio = this.Student.fio;
-      updTeacher.sex = this.Student.sex;
-      updTeacher.phoneNumber = this.Student.phoneNumber;
+      updTeacher.fio = this.Teacher.fio;
+      updTeacher.sex = this.Teacher.sex;
+      updTeacher.phoneNumber = this.Teacher.phoneNumber;
       updTeacher.disciplines = this.selected;
       console.log(updTeacher);
       Api.updateTeacher(updTeacher,this.Teacher.id).then(value => {
