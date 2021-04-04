@@ -3,20 +3,20 @@
     v-row
 
       v-col
-        v-btn-toggle(dense='' shaped='').pa-5
+        v-btn-toggle(dense='' shaped='' v-model="filterButtons").pa-5
           v-tooltip(bottom='')
             template(v-slot:activator='{ on, attrs }')
               v-btn(small='' v-bind='attrs' v-on='on' @click="debtor()")
                 v-icon(small="") mdi-account-cash
             span(style="font-size: 8pt;") Отобразить только должников
-          v-tooltip(bottom='')
+          //v-tooltip(bottom='')
             template(v-slot:activator='{ on, attrs }')
               v-btn(small='' v-bind='attrs' v-on='on')
                 v-icon(small="") mdi-account-cash-outline
             span(style="font-size: 8pt;") Отобразить только тех, у кого нет долга
           v-tooltip(bottom='')
             template(v-slot:activator='{ on, attrs }')
-              v-btn(small='' v-bind='attrs' v-on='on')
+              v-btn(small='' v-bind='attrs' v-on='on' @click="sortByAlph()")
                 v-icon(small="") mdi-sort-alphabetical-ascending
             span(style="font-size: 8pt;") Сортировать по алфавиту
 
@@ -43,8 +43,8 @@
               h2.subtitle-2.mt-2
                 | Подписаные предметы
               v-chip-group(column='' style="height: 50px;")
-                v-progress-circular(indeterminate='' color='primary' v-if="!disciplines")
-                v-chip(outlined='' v-for="discipline in disciplines" :key="discipline.id" @click="showDisciplineForm" :color="discipline.colorCode")
+                v-progress-circular(indeterminate='' color='primary' v-if="loadingDisciplines")
+                v-chip(outlined='' v-for="discipline in disciplines" :key="discipline.id" @click="showDisciplineForm" :color="discipline.colorCode" v-if="!loadingDisciplines")
                   | {{discipline.name}}
               v-divider
               h2.subtitle-2.mt-3  Общая информация
@@ -77,11 +77,14 @@ export default {
     allStudents: [],
     disciplines: null,
     loading: false,
+    loadingDisciplines: false,
 
     slicer: 20,
     panel: true,
 
+    filterButtons: null,
     onlyDebtor: false,
+    byAlpha: false,
 
     loadingStudent: false,
   }),
@@ -92,6 +95,20 @@ export default {
   methods: {
     showDisciplineForm(){
       alert("Че смотришь, мем только строится еще")
+    },
+    sortByAlph(){
+      this.byAlpha = !this.byAlpha;
+      let sortingStudents = this.allStudents;
+      this.students = [];
+      if(this.byAlpha){
+        sortingStudents.sort((a, b) => a.fio.localeCompare(b.fio))
+        this.students = sortingStudents.slice(0,this.slicer);
+        console.log("Я выполнился");
+      }
+      else {
+        this.students = this.allStudents.slice(0,this.slicer);
+      }
+
     },
     debtor(){
       this.onlyDebtor = !this.onlyDebtor;
@@ -132,9 +149,11 @@ export default {
     getDisciplinesByUser(id) {
       //this.loadingStudent = true;
       this.disciplines = null;
+      this.loadingDisciplines = true;
       Api.getDisciplinesByUser(id).then(value => {
             this.disciplines = value.data;
             console.log(this.disciplines)
+            this.loadingDisciplines = false;
             // if(this.students.length > 80){
             //     setTimeout(() => (this.loadingStudent = false), 1000)
             // }
@@ -146,6 +165,7 @@ export default {
           () => {
             console.log('Ошибка');
             //this.loadingStudent = false;
+            this.loadingDisciplines = false;
           });
     },
     showNewStudentForm() {
