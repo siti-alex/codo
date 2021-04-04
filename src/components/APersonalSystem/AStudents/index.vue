@@ -3,7 +3,7 @@
     v-row
       v-col
       v-col
-        v-text-field(label='Поиск' prepend-icon='mdi-account-search')
+        v-text-field(label='Поиск' prepend-icon='mdi-account-search' @input='search')
     v-card(:loading='loading').mb-5
       v-subheader.subtitle-1 Школьники
         v-btn(icon='' color="#8b2639" @click="showNewStudentForm").float-right
@@ -71,6 +71,14 @@ export default {
   methods: {
     showDisciplineForm(){
       alert("Че смотришь, мем только строится еще")
+    },
+    search(search){
+      this.students = this.allStudents.filter(
+          student => student.fio.toLowerCase().match(`^${search.toLowerCase()}.`)
+      );
+      if(!search) {
+        this.students = this.allStudents.slice(0,this.slicer);
+      }
     },
     getAllStudents() {
       this.loading = true;
