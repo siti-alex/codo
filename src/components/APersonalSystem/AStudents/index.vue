@@ -1,11 +1,12 @@
 <template lang="pug">
   div
     v-row
+
       v-col
         v-btn-toggle(dense='' shaped='').pa-5
           v-tooltip(bottom='')
             template(v-slot:activator='{ on, attrs }')
-              v-btn(small='' v-bind='attrs' v-on='on')
+              v-btn(small='' v-bind='attrs' v-on='on' @click="debtor()")
                 v-icon(small="") mdi-account-cash
             span(style="font-size: 8pt;") Отобразить только должников
           v-tooltip(bottom='')
@@ -13,7 +14,11 @@
               v-btn(small='' v-bind='attrs' v-on='on')
                 v-icon(small="") mdi-account-cash-outline
             span(style="font-size: 8pt;") Отобразить только тех, у кого нет долга
-
+          v-tooltip(bottom='')
+            template(v-slot:activator='{ on, attrs }')
+              v-btn(small='' v-bind='attrs' v-on='on')
+                v-icon(small="") mdi-sort-alphabetical-ascending
+            span(style="font-size: 8pt;") Сортировать по алфавиту
 
       v-col
         v-text-field(label='Поиск' prepend-icon='mdi-account-search' @input='search')
@@ -76,6 +81,8 @@ export default {
     slicer: 20,
     panel: true,
 
+    onlyDebtor: false,
+
     loadingStudent: false,
   }),
 
@@ -85,6 +92,20 @@ export default {
   methods: {
     showDisciplineForm(){
       alert("Че смотришь, мем только строится еще")
+    },
+    debtor(){
+      this.onlyDebtor = !this.onlyDebtor;
+      this.students = [];
+      if(this.onlyDebtor){
+        this.allStudents.forEach(element => {
+          if (element.debtor == true) {
+            this.students.push(element);
+          }
+        })
+      }
+      else {
+        this.students = this.allStudents.slice(0,this.slicer);
+      }
     },
     search(search){
       this.students = this.allStudents.filter(
@@ -147,7 +168,7 @@ export default {
   watch: {
     bottom: {
       handler () {
-        if(this.bottom){
+        if(this.bottom && this.onlyDebtor == false){
           this.slicer += 10;
           this.students = this.allStudents.slice(0,this.slicer);
         }
