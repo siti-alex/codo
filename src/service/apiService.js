@@ -38,6 +38,9 @@ const API = axios.create({
 export default {
     api,
 
+    auth(user){
+      return API.post(`/login`,user);
+    },
     getAllStudents(){
         return API.get(`/student/getAll`);
     },
@@ -103,6 +106,9 @@ export default {
     },
     addStudent(student){
       return API.post(`/student/addStudent`, student)
+    },
+    addTeacher(teacher){
+        return API.post(`/teacher/add`, teacher)
     }
 
 //http://адрес:порт/news/{id}/delete

@@ -6,7 +6,7 @@
         v-text-field(label='Поиск' prepend-icon='mdi-account-search')
     v-card(:loading='loading').mb-5
       v-subheader.subtitle-1 Учителя
-        v-btn(icon='' color="#8b2639").float-right
+        v-btn(icon='' color="#8b2639" @click="showNewTeacherForm").float-right
           v-icon mdi-plus
       v-expansion-panels(accordion='' focusable='')
         v-expansion-panel(v-for='teacher in teachers' :key='teacher.id' cols='12' link='' v-if="!loading")
@@ -25,14 +25,16 @@
 
             v-btn(color='primary' fab='' x-small='').float-right
               v-icon mdi-pencil
+    ANewTeacher(ref="aNewTeacher" @update="getAllTeacher()")
 </template>
 
 <script>
 import Api from "@/service/apiService";
+import ANewTeacher from "@/components/APersonalSystem/ATeachers/ANewTeacher/index";
 
 export default {
   name: "ATeachers",
-  components: {},
+  components: {ANewTeacher},
   data: () => ({
 
     selTeacher: null,
@@ -44,6 +46,9 @@ export default {
   methods: {
     showDisciplineForm(){
       alert("Че смотришь, мем только строится еще")
+    },
+    showNewTeacherForm() {
+      this.$refs.aNewTeacher.showDialog();
     },
     getAllTeacher() {
       this.loading = true;
@@ -57,6 +62,7 @@ export default {
             this.loading = false;
           });
     },
+
 
   },
   mounted() {
