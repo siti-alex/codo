@@ -2,8 +2,22 @@
   div
     v-row
       v-col
+        v-btn-toggle(dense='' shaped='').pa-5
+          v-tooltip(bottom='')
+            template(v-slot:activator='{ on, attrs }')
+              v-btn(small='' v-bind='attrs' v-on='on')
+                v-icon(small="") mdi-account-cash
+            span(style="font-size: 8pt;") Отобразить только должников
+          v-tooltip(bottom='')
+            template(v-slot:activator='{ on, attrs }')
+              v-btn(small='' v-bind='attrs' v-on='on')
+                v-icon(small="") mdi-account-cash-outline
+            span(style="font-size: 8pt;") Отобразить только тех, у кого нет долга
+
+
       v-col
         v-text-field(label='Поиск' prepend-icon='mdi-account-search' @input='search')
+
     v-card(:loading='loading').mb-5
       v-subheader.subtitle-1 Школьники
         v-btn(icon='' color="#8b2639" @click="showNewStudentForm").float-right
