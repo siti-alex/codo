@@ -109,6 +109,12 @@ export default {
     },
     addTeacher(teacher){
         return API.post(`/teacher/add`, teacher)
+    },
+    updateTeacher(upd,id){
+        return API.post(`teacher/${id}/update`,upd)
+    },
+    deleteTeacher(id){
+        return API.get(`teacher/${id}/delete`)
     }
 
 //http://адрес:порт/news/{id}/delete

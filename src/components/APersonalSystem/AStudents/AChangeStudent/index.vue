@@ -58,7 +58,7 @@ v-dialog(v-model="mutableDialog" persistent='' max-width='800' @keydown.esc="sho
         template(v-slot:activator='{ on, attrs }')
         v-card
           v-card-title.headline
-            | Предмет будет удален
+            | Студент будет удален
           v-card-text
             | Вы уверены?
           v-card-actions
@@ -77,27 +77,27 @@ v-dialog(v-model="mutableDialog" persistent='' max-width='800' @keydown.esc="sho
             Student: {},
         },
         data: () => ({
-            showDiscipnines: false,
-            mutableDialog: false,
-            subjects: [],
-            items: [],
-            loading: false,
-            search: '',
-            selected: [],
-            dialog: false,
+          showDiscipnines: false,
+          mutableDialog: false,
+          subjects: [],
+          items: [],
+          loading: false,
+          search: '',
+          selected: [],
+          dialog: false,
 
-            // updStudent: {
-            //     login: null,
-            //     password: 'test',
-            //     fio: null,
-            //     sex: null,
-            //     balance: null,
-            //     course: null,
-            //     parenFio: null,
-            //     phoneNumber: null,
-            //     disciplines: null,
-            //     debtor: null
-            // },
+          // updStudent: {
+          //     login: null,
+          //     password: 'test',
+          //     fio: null,
+          //     sex: null,
+          //     balance: null,
+          //     course: null,
+          //     parenFio: null,
+          //     phoneNumber: null,
+          //     disciplines: null,
+          //     debtor: null
+          // },
         }),
 
         computed: {

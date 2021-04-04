@@ -23,18 +23,20 @@
               v-col
                 p.caption Номер телефона: {{teacher.phoneNumber}}
 
-            v-btn(color='primary' fab='' x-small='').float-right
+            v-btn(color='primary' fab='' x-small='' @click="selTeacher = teacher; selTeacher.disciplines = disciplines; showChangeTeacherForm()").float-right
               v-icon mdi-pencil
     ANewTeacher(ref="aNewTeacher" @update="getAllTeacher()")
+    AChangeTeacher(ref="aChangeTeacher" :Teacher="selTeacher" @update="getAllTeacher()")
 </template>
 
 <script>
 import Api from "@/service/apiService";
 import ANewTeacher from "@/components/APersonalSystem/ATeachers/ANewTeacher/index";
+import AChangeTeacher from "@/components/APersonalSystem/ATeachers/AChangeTeacher/index";
 
 export default {
   name: "ATeachers",
-  components: {ANewTeacher},
+  components: {AChangeTeacher, ANewTeacher},
   data: () => ({
 
     selTeacher: null,
@@ -49,6 +51,9 @@ export default {
     },
     showNewTeacherForm() {
       this.$refs.aNewTeacher.showDialog();
+    },
+    showChangeTeacherForm() {
+      this.$refs.aChangeTeacher.showDialog();
     },
     getAllTeacher() {
       this.loading = true;
