@@ -36,6 +36,7 @@ name: "ALogin",
         username: this.login,
         password: this.password,
       };
+      console.log(user);
       Api.auth(user).then(value => {
             console.log(value);
             //this.imgSrc = `http://192.168.202.104:8080/news/getImage?id=${value.data.id}`

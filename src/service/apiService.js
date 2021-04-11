@@ -1,5 +1,5 @@
 import axios from 'axios';
-//import router from '@/router';
+import router from '@/router';
 
 
 //const api = 'http://213.87.96.9:6006';
@@ -19,27 +19,57 @@ const API = axios.create({
         "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS",
         "Access-Control-Allow-Headers": "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With",
         'Content-Type': 'application/json',
-        "Set-Cookie": "SameSite=None;"
+        "Set-Cookie": "SameSite=None;",
         //"Set-Cookie": "cross-site-cookie=name; SameSite=None; Secure"
     }
 });
 
-/*API.interceptors.response.use(({data}) => data
+API.interceptors.response.use(({data}) => data
     , (error) => {
         if (error.response && error.response.status === 403 || (error.response && error.response.status === 401)) {
             router.replace({
-                name: 'auth',
+                name: 'Login',
                 query: {redirect: router.currentRoute.fullPath},
             })
         }
-    }); */
+    });
 
 
 export default {
     api,
 
-    auth(user){
-      return API.post(`/login`,user);
+    // auth(user){
+    //   return API.post(`/login`, user);
+    // },
+    auth(auth) {
+        try {
+            const data = new FormData();
+            data.append('username', auth.username)
+            data.append('password', auth.password)
+            const response = API.post('/login', {
+                //data,
+                auth: {
+                    username: auth.username,
+                    password: auth.password
+                }
+            }, {
+                credentials: 'same-origin', withCredentials: true,
+                auth,
+                headers: {
+
+                    "Accept": "application/json",
+                    "Content-Type": "application/json",
+                    "Set-Cookie": "SameSite=None;",
+                    'Authorization': 'Basic ' + btoa(`${auth.username}:${auth.password}`)
+                }
+            })
+            console.log(response);
+            return response;
+
+        } catch (e) {
+            // console.log(e.response);
+            return e;
+        }
     },
     getAllStudents(){
         return API.get(`/student/getAll`);
