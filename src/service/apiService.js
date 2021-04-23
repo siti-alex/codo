@@ -1,15 +1,15 @@
 import axios from 'axios';
-import router from '@/router';
+//import router from '@/router';
 
-
+axios.defaults.withCredentials = true;
 //const api = 'http://213.87.96.9:6006';
-const api = 'http://192.168.202.104:8080';
+const api = 'https://192.168.202.104:8080';
 
 
 const baseURL = `${api}`;
 
 const API = axios.create({
-    withCredentials: true,
+    // withCredentials: true,
     baseURL,
 
     headers: {
@@ -17,60 +17,66 @@ const API = axios.create({
         "Access-Control-Allow-Origin": "*",
         "Accept": "application/json",
         "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS",
-        "Access-Control-Allow-Headers": "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With",
+        //"Access-Control-Allow-Headers": "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With",
+        "Access-Control-Allow-Headers": "Content-Type, Access-Control-Allow-Headers, X-Requested-With",
         'Content-Type': 'application/json',
         "Set-Cookie": "SameSite=None;",
         //"Set-Cookie": "cross-site-cookie=name; SameSite=None; Secure"
     }
 });
 
-API.interceptors.response.use(({data}) => data
-    , (error) => {
-        if (error.response && error.response.status === 403 || (error.response && error.response.status === 401)) {
-            router.replace({
-                name: 'Login',
-                query: {redirect: router.currentRoute.fullPath},
-            })
-        }
-    });
+// API.interceptors.response.use(({data}) => data
+//     , (error) => {
+//         if (error.response && error.response.status === 403 || (error.response && error.response.status === 401)) {
+//             router.replace({
+//                 name: 'Login',
+//                 query: {redirect: router.currentRoute.fullPath},
+//             })
+//         }
+//     });
 
 
 export default {
     api,
 
-    // auth(user){
-    //   return API.post(`/login`, user);
-    // },
-    auth(auth) {
-        try {
-            const data = new FormData();
-            data.append('username', auth.username)
-            data.append('password', auth.password)
-            const response = API.post('/login', {
-                //data,
-                auth: {
-                    username: auth.username,
-                    password: auth.password
-                }
-            }, {
-                credentials: 'same-origin', withCredentials: true,
-                auth,
-                headers: {
-
-                    "Accept": "application/json",
-                    "Content-Type": "application/json",
-                    "Set-Cookie": "SameSite=None;",
-                    'Authorization': 'Basic ' + btoa(`${auth.username}:${auth.password}`)
-                }
-            })
-            console.log(response);
-            return response;
-
-        } catch (e) {
-            // console.log(e.response);
-            return e;
-        }
+    auth(user) {
+        console.log(user)
+        return API.post('/login', {}, user)
+        // try {
+        //     // const data = new FormData();
+        //     // data.append('username', auth.username)
+        //     // data.append('password', auth.password)
+        //     const response = API.post('/login', {
+        //         //data,
+        //         auth: {
+        //             username: user.username,
+        //             password: user.password
+        //         }
+        //     }, {
+        //         credentials: 'same-origin', withCredentials: true,
+        //
+        //         //user,
+        //         headers: {
+        //
+        //             //"Accept": "application/json",
+        //             "Content-Type": "application/json",
+        //             //"Set-Cookie": "SameSite=None;",
+        //             //'Authorization': 'Basic ' + btoa(`${auth.username}:${auth.password}`)
+        //             'Authorization': 'Basic ' + btoa(`${user.username}:${user.password}`)
+        //
+        //         },
+        //     })
+        //     console.log(response);
+        //     return response;
+        //
+        // } catch (e) {
+        //     console.log(e.response);
+        //     return e;
+        // }
     },
+    // auth(auth) {
+    //     return API.post('/login', {}, auth)
+    // },
     getAllStudents(){
         return API.get(`/student/getAll`);
     },
@@ -145,6 +151,9 @@ export default {
     },
     deleteTeacher(id){
         return API.get(`teacher/${id}/delete`)
+    },
+    getAllLessons(){
+        return API.get(`/lesson/getAll`);
     }
 
 //http://адрес:порт/news/{id}/delete

@@ -12,6 +12,7 @@ import EditEvent from '../components/APersonalSystem/AEventEdit/index.vue'
 import Students from '../components/APersonalSystem/AStudents/index.vue'
 import Teachers from '../components/APersonalSystem/ATeachers/index.vue'
 import Subjects from '../components/APersonalSystem/ASubjects/index.vue'
+import Journal from '../components/APersonalSystem/AJournal/index.vue'
 import Personal from '../components/APersonalSystem/index.vue'
 import Directions from '../components/AHomePage/ADirectionsPage/index.vue'
 import Docs from '../components/AHomePage/ADocsPage/index.vue'
@@ -81,6 +82,10 @@ const routes = [
       {
         path: 'subjects',
         component: Subjects
+      },
+      {
+        path: 'journal',
+        component: Journal
       },
       {
         path: 'edit-news',

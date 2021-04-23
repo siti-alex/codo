@@ -7,7 +7,7 @@ div
     v-row(v-if="event")
       v-col(v-for='item in event.slice(0, 3)' cols='4')
         v-card(tile='' height='100%' hover='' @click="" :to="{name: 'EventId', params: { id: item.id}}").mx-5
-          v-img.white--text.align-end(height='150px' :src='serverIp+`/image/`+item.image.id' v-if="item.image")
+          v-img.white--text.align-end(height='150px' :src='serverIp+`/image/public/`+item.image.id' v-if="item.image")
             v-card-title {{item.head}}
           v-card-subtitle.pb-0
             v-chip(color='deep-purple' dark='' small='').mb-1

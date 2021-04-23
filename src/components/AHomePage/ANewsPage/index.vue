@@ -7,7 +7,8 @@ div
       v-col(v-for='newses in news' :key='newses.id' cols='4')
         v-card(tile='' height='100%' hover='' @click="" :to="{name: 'NewsId', params: { id: newses.id}}").mx-5.custom
           v-img.white--text.align-end(height='200px' :src='serverIp+`/image/public/`+newses.image.id')
-            v-card-title(style="background-color: #180000; opacity: 0.8; padding: 7px;") {{newses.head}}
+            v-card-title(style="background-color: #180000; opacity: 0.8; padding: 7px;")
+              div.ml-2 {{newses.head}}
           v-card-subtitle.pb-0
             | {{newses.date}}
           v-card-text().subtitle-2
@@ -31,7 +32,7 @@ name: "ANewsPage",
             Api.getAllNews().then(value => {
                     this.news = value.data;
                     //this.imgSrc = `http://192.168.202.104:8080/news/getImage?id=${value.data.id}`
-                //console.log(value);
+                console.log(value);
                 },
                 () => {
                     console.log('Ошибка');

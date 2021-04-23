@@ -32,10 +32,12 @@ name: "ALogin",
   },
   methods: {
     auth() {
-      let user = {
-        username: this.login,
-        password: this.password,
-      };
+        let user = {
+            auth: {
+                username: this.login,
+                password: this.password,
+            }
+        };
       console.log(user);
       Api.auth(user).then(value => {
             console.log(value);
@@ -46,7 +48,6 @@ name: "ALogin",
           () => {
             console.log('Ошибка');
           });
-      //console.log(auth);
     }
   }
 }
