@@ -40,14 +40,17 @@
             test(){
               console.log(this.selectDay);
             },
-            selectedDay(){
-              this.lessons.forEach((element) => {
-                  if (this.date === element.date) {
-                      //this.selectDay = element;
-                      this.selectDay.push(element);
-                      console.log(element);
-                  }
-              })
+            selectedDay() {
+                this.selectDay = [];
+                if (this.selectDay.length === 0) {
+                this.lessons.forEach((element) => {
+                    if (this.date === element.date) {
+                        //this.selectDay = element;
+                        this.selectDay.push(element);
+                        console.log(element);
+                    }
+                })
+            }
             },
             getAllLessons(){
                 Api.getAllLessons().then(value => {
