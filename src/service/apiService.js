@@ -154,6 +154,9 @@ export default {
     },
     getAllLessons(){
         return API.get(`/lesson/getAll`);
+    },
+    addLesson(lesson){
+        return API.post(`/lesson/add`, lesson);
     }
 
 //http://адрес:порт/news/{id}/delete
