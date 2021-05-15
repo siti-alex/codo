@@ -1,20 +1,19 @@
 <template lang="pug">
-  v-dialog(v-model="mutableDialog" max-width="600px")
+  v-dialog(v-model="mutableDialog" max-width="800px")
     v-card.noscroll
       v-card-title
         span.headline Новый урок
       v-card-text
         v-container
           v-row
-            v-col(cols='12')
+            v-col(cols='5')
+              v-date-picker(v-model='date' no-title='' locale='ru-ru')
+            v-col(cols='3')
               v-text-field(label='Кабинет')
-            v-col(cols='12')
-              v-text-field(label="Номер пары")
-            v-col(cols='12')
-              v-text-field(label="Предмет")
-            v-col(cols='12')
               v-text-field(label="Учитель")
-
+            v-col(cols='4')
+              v-text-field(label="Номер пары")
+              v-text-field(label="Предмет")
 
 
       v-card-actions
@@ -29,6 +28,7 @@ export default {
 name: "ANewLesson",
   data: () => ({
     mutableDialog: false,
+    date: new Date().toISOString().substr(0, 10),
   }),
   methods: {
     showDialog() {
