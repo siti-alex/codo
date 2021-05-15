@@ -1,6 +1,8 @@
 <template lang="pug">
   div
-    //v-btn(@click="test") test
+    v-btn(color='#8b2639' dark='' small='' @click="showNewLessonForm").float-right.mr-3
+      v-icon(left='' small='') mdi-plus
+      | Новый урок
     v-row(justify='center').mt-6
       br
       v-date-picker.mt-4(v-model='date' @input="selectedDay" locale="ru-ru" :allowed-dates='getAllowedDates' full-width='' landscape='' color='#8b2639').ma-5
@@ -20,14 +22,16 @@
                         br
                         div.font-weight-bold {{ lesson.teacher.fio }}
                       div ДЗ: {{ lesson.homework }}
-
+    a-new-lesson(ref="aNewLessonForm" )
 </template>
 
 <script>
     import Api from "@/service/apiService";
+    import ANewLesson from "@/components/APersonalSystem/AJournal/ANewLesson/index";
     export default {
         name: "AJournal",
-        data:() => ({
+      components: {ANewLesson},
+      data:() => ({
             dialog: false,
             lessons: [],
             lessonDates: [],
@@ -39,6 +43,9 @@
         methods: {
             test(){
               console.log(this.selectDay);
+            },
+            showNewLessonForm() {
+              this.$refs.aNewLessonForm.showDialog();
             },
             selectedDay() {
                 this.selectDay = [];

@@ -2,8 +2,8 @@ import axios from 'axios';
 //import router from '@/router';
 
 axios.defaults.withCredentials = true;
-//const api = 'http://213.87.96.9:6006';
-const api = 'https://192.168.202.104:8080';
+const api = 'https://213.87.96.9:6006';
+//const api = 'https://192.168.202.104:8080';
 
 
 const baseURL = `${api}`;
@@ -40,7 +40,7 @@ export default {
     api,
 
     auth(user) {
-        console.log(user)
+        //console.log(user)
         return API.post('/login', {}, user)
         // try {
         //     // const data = new FormData();
