@@ -22,7 +22,7 @@
                         br
                         div.font-weight-bold {{ lesson.teacher.fio }}
                       div ДЗ: {{ lesson.homework }}
-    a-new-lesson(ref="aNewLessonForm" @update="getAllLessons")
+    a-new-lesson(ref="aNewLessonForm" @update="getAllLessons" @updateDate="selectedDay")
 </template>
 
 <script>

@@ -66,6 +66,7 @@ name: "ANewLesson",
       // };
       Api.addLesson(this.newLesson).then(() => {
         this.$emit('update');
+        this.$emit('updateDate');
         this.showDialog();
       });
       console.log(this.newLesson);
@@ -73,6 +74,12 @@ name: "ANewLesson",
     },
     showDialog() {
       this.mutableDialog = !this.mutableDialog;
+      this.newLesson.cabinet = null,
+      this.newLesson.date = null,
+      this.newLesson.discipline.id = null,
+      this.newLesson.teacher.id = null,
+      this.newLesson.homework = null,
+      this.newLesson.lessonNumber = null
     },
     getAllTeacher() {
       Api.getAllTeachers().then(value => {
