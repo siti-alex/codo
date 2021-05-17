@@ -12,10 +12,10 @@
               v-text-field(label='Кабинет' v-model="newLesson.cabinet")
               //v-text-field(label="Учитель")
               //v-select(:options="teachers.map(g => ({label: g.fio, value: g.id}))")
-              v-select(v-model="newLesson.teacher" item-value="id" item-text="fio" label='Учитель' :items="teachers")
+              v-select(v-model="newLesson.teacher.id" item-value="id" item-text="fio" label='Учитель' :items="teachers")
             v-col(cols='4')
               v-text-field(label="Номер пары" v-model="newLesson.lessonNumber")
-              v-select(v-model="newLesson.discipline" item-value="id" item-text="name" label='Предмет' :items="subjects")
+              v-select(v-model="newLesson.discipline.id" item-value="id" item-text="name" label='Предмет' :items="subjects")
 
 
       v-card-actions
@@ -39,8 +39,13 @@ name: "ANewLesson",
       date: null,
       cabinet: null,
       lessonNumber: null,
-      discipline: null,
-      teacher: null
+      discipline: {
+          id: null
+      },
+      teacher: {
+          id: null
+      },
+      homework: null,
     }
   }),
   methods: {
@@ -59,11 +64,11 @@ name: "ANewLesson",
       //this.newRenter.room = {
       // id: this.roomId
       // };
-      Api.addLesson(formdata).then(() => {
+      Api.addLesson(this.newLesson).then(() => {
         this.$emit('update');
         this.showDialog();
       });
-      console.log(formdata);
+      console.log(this.newLesson);
 
     },
     showDialog() {
