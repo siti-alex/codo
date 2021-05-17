@@ -40,8 +40,8 @@ name: "ALogin",
         };
       console.log(user);
       Api.auth(user).then(value => {
-            console.log(value);
-            //this.imgSrc = `http://192.168.202.104:8080/news/getImage?id=${value.data.id}`
+            console.log(value.data[0].authority);
+            localStorage.setItem('role', value.data[0].authority);
             this.$router.push('/personal/students');
 
           },

@@ -1,5 +1,6 @@
 <template lang="pug">
   div
+    v-btn(@click="test") Test
     v-btn(color='#8b2639' dark='' small='' @click="showNewLessonForm").float-right.mr-3
       v-icon(left='' small='') mdi-plus
       | Новый урок
@@ -42,7 +43,7 @@
         }),
         methods: {
             test(){
-              console.log("Дарова");
+              console.log(localStorage.getItem('role'));
             },
             showNewLessonForm() {
               this.$refs.aNewLessonForm.showDialog();
