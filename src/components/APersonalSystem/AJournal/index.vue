@@ -16,7 +16,7 @@
                 v-timeline(align-top='' dense='')
                   //v-timeline-item(v-for='discipline in selectDay.discipline' :key='discipline.id' :color='discipline.colorCode' small='')
                   v-timeline-item(v-for='lesson in selectDay' :key='lesson.id' :color='lesson.discipline.colorCode' small='')
-                    div
+                    v-card(@click="test" style="cursor: pointer" flat='')
                       div.font-weight-normal
                         strong {{ lesson.discipline.name }}
                         br
@@ -42,7 +42,7 @@
         }),
         methods: {
             test(){
-              console.log(this.selectDay);
+              console.log("Дарова");
             },
             showNewLessonForm() {
               this.$refs.aNewLessonForm.showDialog();
