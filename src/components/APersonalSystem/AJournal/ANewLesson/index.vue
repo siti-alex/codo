@@ -9,7 +9,7 @@
             v-col(cols='5')
               v-date-picker(v-model='date' no-title='' locale='ru-ru')
             v-col(cols='3')
-              v-text-field(label='Кабинет' v-model="newLesson.cabinet")
+              v-text-field(label='Кабинет' v-model="newLesson.classroom")
               //v-text-field(label="Учитель")
               //v-select(:options="teachers.map(g => ({label: g.fio, value: g.id}))")
               v-select(v-model="newLesson.teacher.id" item-value="id" item-text="fio" label='Учитель' :items="teachers")
@@ -37,7 +37,7 @@ name: "ANewLesson",
     subjects: [],
     newLesson: {
       date: null,
-      cabinet: null,
+      classroom: null,
       lessonNumber: null,
       discipline: {
           id: null
@@ -55,15 +55,6 @@ name: "ANewLesson",
     },
     AddNewLesson(){
       this.newLesson.date = this.date;
-      let formdata = new FormData();
-      formdata.append("date", this.newLesson.date);
-      formdata.append("cabinet", this.newLesson.cabinet);
-      formdata.append("lessonNumber",this.newLesson.lessonNumber);
-      formdata.append("teacher", this.newLesson.teacher);
-      formdata.append("discipline", this.newLesson.discipline);
-      //this.newRenter.room = {
-      // id: this.roomId
-      // };
       Api.addLesson(this.newLesson).then(() => {
         this.$emit('update');
         this.$emit('updateDate');
@@ -74,7 +65,7 @@ name: "ANewLesson",
     },
     showDialog() {
       this.mutableDialog = !this.mutableDialog;
-      this.newLesson.cabinet = null,
+      this.newLesson.classroom = null,
       this.newLesson.date = null,
       this.newLesson.discipline.id = null,
       this.newLesson.teacher.id = null,
