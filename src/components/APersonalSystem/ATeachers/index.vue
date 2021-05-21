@@ -47,6 +47,8 @@ export default {
     loading: false,
     slicer: 20,
 
+    user: null,
+
   }),
   methods: {
     showDisciplineForm() {
@@ -91,6 +93,7 @@ export default {
       this.scrollFunction()
     };
     this.getAllTeacher();
+    this.user = localStorage.getItem('role');
   },
   watch: {
     bottom: {

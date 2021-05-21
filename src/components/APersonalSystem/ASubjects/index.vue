@@ -2,7 +2,7 @@
     div
         v-card(:loading='loading').mb-5
             v-subheader.subtitle-1 Предметы
-              v-btn(icon='' color="#8b2639" @click="showNewSubjectForm").float-right
+              v-btn(icon='' color="#8b2639" @click="showNewSubjectForm" v-if="user!=='ROLE_USER'").float-right
                 v-icon mdi-plus
             v-expansion-panels(accordion='' focusable='')
                 v-expansion-panel(v-for='subject in subjects' :key='subject.id' cols='12' link='' v-if="!loading")
@@ -16,8 +16,7 @@
                                 v-chip(v-for="teacher in subject.teacher" :key="teacher.id" label='' outlined='' color='#800024') {{teacher.fio}}
                             v-card-text.pb-0 Кабинет: №215
                             v-card-text.pb-0 Стоимость посещения: {{subject.cost}} руб.
-                            v-chip(:color="subject.colorCode")
-                            v-btn(color='primary' fab='' x-small='' @click="showChangeSubjectForm(); selDiscipline = subject").float-lg-right
+                            v-btn(color='primary' fab='' v-if="user!=='ROLE_USER'" x-small='' @click="showChangeSubjectForm(); selDiscipline = subject").float-lg-right
                                 v-icon mdi-pencil
 
         ANewSubjectForm(ref="aNewSubjectForm" @update="getAllSubjects")
@@ -36,6 +35,7 @@
                 selDiscipline: [],
                 subjects: [],
                 loading: false,
+                user: null,
             }
         },
         methods: {
@@ -60,6 +60,7 @@
         },
         mounted() {
             this.getAllSubjects();
+            this.user = localStorage.getItem('role');
         }
     }
 </script>
