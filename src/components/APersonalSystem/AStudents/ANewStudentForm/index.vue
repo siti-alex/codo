@@ -17,7 +17,7 @@
                 v-radio(value=true label="Мужской").mt-2
                 v-radio(value=false label="Женский")
             v-col(cols='7')
-              v-text-field(label="Курс" v-model="newStudent.course")
+              v-text-field(label="Курс" v-model="newStudent.course.id")
               v-text-field(label="Уплачено за месяц" v-model="newStudent.balance")
             v-col(cols='5')
               v-text-field(label="Логин" v-model="newStudent.login" @click:append-outer="test" )
@@ -49,7 +49,7 @@ name: "ANewStudentForm",
       password: null,
       fio: null,
       balance: null,
-      course: null,
+      course: {id: null},
       debtor: false,
       parentFio: null,
       phoneNumber: null,
