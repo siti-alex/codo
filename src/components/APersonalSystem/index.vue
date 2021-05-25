@@ -2,9 +2,8 @@
   div#inspire
     v-navigation-drawer(app='' clipped='' mobile-breakpoint=0)
       v-sheet.pa-4(color='grey lighten-4')
-        div(v-if="user == 'ROLE_ADMIN'").title Администратор
-        div(v-else-if="user == 'ROLE_TEACHER'").title Преподаватель
-        div(v-else-if="user == 'ROLE_USER'").title Ученик
+        div().title {{fio}}
+
       v-divider
       v-list
         v-list-item(v-for='[icon, text, route, privilege, teacher] in links' :key='icon' link='' :to="route" v-if="privilege!==user && teacher!==user")
@@ -24,21 +23,23 @@ export default {
 name: "APersonalSystem",
   data: () => ({
     links: [
-      ['mdi-school', 'Школьники', '/personal/students', 'ROLE_USER'],
+      ['mdi-school', 'Школьники', '/personal/students', '[ROLE_USER]'],
       ['mdi-book-open', 'Предметы', '/personal/subjects'],
-      ['mdi-account-multiple-outline', 'Учителя', '/personal/teachers', 'ROLE_USER'],
+      ['mdi-account-multiple-outline', 'Учителя', '/personal/teachers', '[ROLE_USER]'],
       //['mdi-newspaper', 'Расписание'],
-      ['mdi-notebook-outline', 'Журнал', '/personal/journal', 'ROLE_USER'],
-      ['mdi-pencil-box-outline', 'Редактор новостей', '/personal/edit-news', 'ROLE_USER', 'ROLE_TEACHER'],
-      ['mdi-calendar-edit', 'Редактор мероприятий', '/personal/edit-event', 'ROLE_USER', 'ROLE_TEACHER'],
+      ['mdi-notebook-outline', 'Журнал', '/personal/journal', '[ROLE_USER]'],
+      ['mdi-pencil-box-outline', 'Редактор новостей', '/personal/edit-news', '[ROLE_USER]', '[ROLE_TEACHER]'],
+      ['mdi-calendar-edit', 'Редактор мероприятий', '/personal/edit-event', '[ROLE_USER]', '[ROLE_TEACHER]'],
     ],
       user: null,
+      fio: null,
   }),
   methods: {
 
   },
   mounted() {
       this.user = localStorage.getItem('role');
+      this.fio = localStorage.getItem('fio');
   }
 
 }

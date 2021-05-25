@@ -40,8 +40,9 @@ name: "ALogin",
         };
       console.log(user);
       Api.auth(user).then(value => {
-            console.log(value.data[0].authority);
-            localStorage.setItem('role', value.data[0].authority);
+            console.log(value.data[0]);
+            localStorage.setItem('role', value.data[0]);
+            localStorage.setItem('fio', value.data[1]);
             this.$router.push('/personal/students');
 
           },
