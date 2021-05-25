@@ -72,7 +72,7 @@ export default {
       formdata.append("file", this.files);
       Api.UploadImage(formdata).then(result => {
         console.log(result.data);
-        this.$emit('insertImage', `<img style="float: ${this.formatImgText}; margin: 0 13px 5px 0; " src=${Api.api}/image/${result.data} width=${this.widthImg} alt=${this.text}></img>`);
+        this.$emit('insertImage', `<img style="float: ${this.formatImgText}; margin: 0 13px 5px 0; " src=${Api.api}/image/public/${result.data} width=${this.widthImg} alt=${this.text}></img>`);
         this.showDialog();
       })
     },

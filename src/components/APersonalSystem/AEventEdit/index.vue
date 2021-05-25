@@ -12,7 +12,7 @@
                 //v-col(v-for='n in 8' cols='4')
                 v-col(v-for='event in events' :key="event.id" cols='4')
                     v-card.mx-5
-                        v-img.white--text.align-end(height='200px' :src='serverIp+`/image/`+event.image.id')
+                        v-img.white--text.align-end(height='200px' :src='serverIp+`/image/public/`+event.image.id')
                             v-card-title {{event.head}}
                         v-card-subtitle.pb-0
                             | {{event.date}}
